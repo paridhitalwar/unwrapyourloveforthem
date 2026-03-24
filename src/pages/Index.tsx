@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { relationships, occasions } from "@/lib/quiz-data";
+import { relationships, occasions, type QuizMode } from "@/lib/quiz-data";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -14,12 +14,13 @@ const Index = () => {
   const [relationship, setRelationship] = useState("");
   const [occasion, setOccasion] = useState("");
   const [budget, setBudget] = useState("");
+  const [mode, setMode] = useState<QuizMode>("quick");
 
   const canProceed = name.trim() && relationship && occasion && budget;
 
   const handleSubmit = () => {
     if (!canProceed) return;
-    const params = new URLSearchParams({ name: name.trim(), relationship, occasion, budget });
+    const params = new URLSearchParams({ name: name.trim(), relationship, occasion, budget, mode });
     navigate(`/quiz?${params.toString()}`);
   };
 
@@ -98,6 +99,54 @@ const Index = () => {
             />
           </div>
 
+          {/* Mode Selection */}
+          <div className="space-y-2">
+            <Label className="text-sm font-medium text-foreground">How deep should we go?</Label>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                onClick={() => setMode("quick")}
+                className={`p-4 rounded-lg border text-left transition-all duration-200 ${
+                  mode === "quick"
+                    ? "border-primary bg-secondary ring-1 ring-primary"
+                    : "border-border bg-card hover:border-primary/50"
+                }`}
+              >
+                <div className="flex items-center gap-2 mb-1">
+                  <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
+                    mode === "quick" ? "border-primary" : "border-muted-foreground"
+                  }`}>
+                    {mode === "quick" && <div className="w-2 h-2 rounded-full bg-primary" />}
+                  </div>
+                  <span className="text-sm font-semibold text-foreground">Quick</span>
+                </div>
+                <p className="text-xs text-muted-foreground ml-6">6 questions · ~3 mins</p>
+                <p className="text-xs text-muted-foreground ml-6">For casual occasions</p>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setMode("deep")}
+                className={`p-4 rounded-lg border text-left transition-all duration-200 ${
+                  mode === "deep"
+                    ? "border-primary bg-secondary ring-1 ring-primary"
+                    : "border-border bg-card hover:border-primary/50"
+                }`}
+              >
+                <div className="flex items-center gap-2 mb-1">
+                  <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
+                    mode === "deep" ? "border-primary" : "border-muted-foreground"
+                  }`}>
+                    {mode === "deep" && <div className="w-2 h-2 rounded-full bg-primary" />}
+                  </div>
+                  <span className="text-sm font-semibold text-foreground">Deep dive</span>
+                </div>
+                <p className="text-xs text-muted-foreground ml-6">15 questions · ~8 mins</p>
+                <p className="text-xs text-muted-foreground ml-6">For people who matter most</p>
+              </button>
+            </div>
+          </div>
+
           <Button
             onClick={handleSubmit}
             disabled={!canProceed}
@@ -107,7 +156,7 @@ const Index = () => {
           </Button>
 
           <p className="text-center text-xs text-muted-foreground mt-3">
-            Takes about 5 minutes. No sign up needed.
+            {mode === "quick" ? "Takes about 3 minutes." : "Takes about 8 minutes."} No sign up needed.
           </p>
         </motion.div>
       </main>
