@@ -3,25 +3,38 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
-import type { GiftResult } from "@/lib/quiz-data";
+import type { GiftResult, QuizMode } from "@/lib/quiz-data";
 
 const Results = () => {
   const navigate = useNavigate();
   const [result, setResult] = useState<GiftResult | null>(null);
   const [name, setName] = useState("");
+  const [mode, setMode] = useState<QuizMode>("quick");
 
   useEffect(() => {
     const stored = sessionStorage.getItem("unwrap-result");
     const storedName = sessionStorage.getItem("unwrap-name");
+    const storedMode = sessionStorage.getItem("unwrap-mode") as QuizMode | null;
     if (!stored || !storedName) {
       navigate("/");
       return;
     }
     setResult(JSON.parse(stored));
     setName(storedName);
+    if (storedMode) setMode(storedMode);
   }, [navigate]);
 
   if (!result) return null;
+
+  const isDeep = mode === "deep";
+  const territoryCount = result.territories.length;
+
+  const cardNoteEntries = [
+    { label: "Heartfelt", text: result.cardNotes.heartfelt },
+    { label: "Funny & warm", text: result.cardNotes.funny },
+    { label: "Simple & sincere", text: result.cardNotes.simple },
+    ...(result.cardNotes.playful ? [{ label: "Playful inside-joke", text: result.cardNotes.playful }] : []),
+  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -52,7 +65,7 @@ const Results = () => {
           className="mb-10"
         >
           <h2 className="text-sm font-medium text-muted-foreground mb-4">
-            Three directions to explore
+            {territoryCount === 4 ? "Four" : "Three"} directions to explore
           </h2>
           <div className="space-y-4">
             {result.territories.map((territory, idx) => (
@@ -83,6 +96,12 @@ const Results = () => {
                       ))}
                     </ul>
                   </div>
+
+                  {territory.trendingIdea && (
+                    <div className="p-3 rounded-lg bg-accent/10 border border-accent/20">
+                      <p className="text-sm text-foreground font-medium">📈 {territory.trendingIdea}</p>
+                    </div>
+                  )}
 
                   <div>
                     <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1">Make it yourself</p>
@@ -116,6 +135,42 @@ const Results = () => {
           </div>
         </motion.section>
 
+        {/* Trending Picks (deep mode) */}
+        {result.trendingPicks && result.trendingPicks.length > 0 && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="mb-10"
+          >
+            <h2 className="text-sm font-medium text-muted-foreground mb-4">
+              📈 Trending right now for someone like {name}
+            </h2>
+            <div className="space-y-2">
+              {result.trendingPicks.map((pick, idx) => (
+                <div key={idx} className="p-4 rounded-lg bg-accent/10 border border-accent/20">
+                  <p className="text-sm font-medium text-foreground">{pick.item}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">— {pick.reason}</p>
+                </div>
+              ))}
+            </div>
+          </motion.section>
+        )}
+
+        {/* Surprise Note */}
+        {result.surpriseNote && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.55 }}
+            className="mb-10"
+          >
+            <div className="p-4 rounded-lg bg-secondary border border-border">
+              <p className="text-sm text-foreground italic">💡 {result.surpriseNote}</p>
+            </div>
+          </motion.section>
+        )}
+
         {/* Card Notes */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
@@ -127,11 +182,7 @@ const Results = () => {
             What to write in the card
           </h2>
           <div className="space-y-3">
-            {[
-              { label: "Heartfelt", text: result.cardNotes.heartfelt },
-              { label: "Funny & warm", text: result.cardNotes.funny },
-              { label: "Simple & sincere", text: result.cardNotes.simple },
-            ].map((note, idx) => (
+            {cardNoteEntries.map((note, idx) => (
               <div key={idx} className="p-4 rounded-lg bg-card border border-border">
                 <p className="text-xs font-medium text-accent mb-1.5">{note.label}</p>
                 <p className="text-sm text-foreground leading-relaxed italic">"{note.text}"</p>
@@ -151,6 +202,7 @@ const Results = () => {
             onClick={() => {
               sessionStorage.removeItem("unwrap-result");
               sessionStorage.removeItem("unwrap-name");
+              sessionStorage.removeItem("unwrap-mode");
               navigate("/");
             }}
             variant="outline"

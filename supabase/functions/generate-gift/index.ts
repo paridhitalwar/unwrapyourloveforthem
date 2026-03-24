@@ -9,44 +9,97 @@ serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
-    const { name, relationship, occasion, budget, questions, answerLabels } = await req.json();
+    const { name, relationship, occasion, budget, mode, questions, answerLabels } = await req.json();
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
+
+    const isDeep = mode === "deep";
 
     const systemPrompt = `You are a warm, insightful gift advisor. You write like a thoughtful friend — never like a chatbot or algorithm. 
 Never use the words "algorithm", "AI", or "data". Never say "buy this". Use phrases like "consider this" or "explore this".
 You must respond with valid JSON only. No markdown, no code blocks, just JSON.`;
 
+    const trendGuidance = isDeep ? `
+
+GIFT TREND GUIDANCE (weave these in where they fit the person):
+- Hyper-personalisation (custom illustrations, star maps, engraved items) — for sentimental types
+- Experience gifting (workshops, classes, sessions) — for experience-oriented and extrovert types
+- Wellness gifting (aromatherapy, journaling, skincare) — for people who rarely treat themselves
+- Sustainable gifting (plantable cards, upcycled products) — for minimalist aesthetic types
+- Learning gifts (Masterclass, Skillshare, skill kits) — for deep-interest types
+- Micro-luxury (premium candles, silk, artisan products) — for things they won't buy themselves
+- Digital creative gifts (Spotify plaques, custom portraits) — for sentimental + playful relationships
+- Plant gifting (rare plants, terrariums, grow kits) — for nature-oriented types
+
+IMPORTANT: Include India-specific shopping options where possible (Ugaoo, Jaypore, Kama Ayurveda, The Label Life, Chumbak, Nykaa, local Etsy sellers).` : "";
+
+    const portraitInstructions = isDeep
+      ? `"portrait": "A warm 5-6 sentence paragraph describing ${name}'s personality. Reference at least 4 specific answer signals. Mention their current life season explicitly. Use ${name}'s name 2-3 times. Must feel like it was written by someone who knows them personally."`
+      : `"portrait": "A warm 3-4 sentence paragraph describing ${name}'s personality. Be specific, not generic. Reference their traits from the answers. Write like a perceptive friend, not a machine."`;
+
+    const territoryCount = isDeep ? 4 : 3;
+    const giftIdeaCount = isDeep ? 4 : 3;
+    const linkCount = isDeep ? 4 : 3;
+
+    const trendingField = isDeep
+      ? `\n      "trendingIdea": "One trending gift idea explicitly labeled as 'Trending right now: [item]' with reason why it fits ${name}",`
+      : "";
+
+    const cardNotesStructure = isDeep
+      ? `"cardNotes": {
+    "heartfelt": "3-4 sentences, deeply personal to ${name}, referencing specific traits",
+    "funny": "2 sentences, warm humour referencing the ${occasion} or ${relationship} relationship",
+    "simple": "1 sentence, sincere and direct",
+    "playful": "1-2 sentences in an inside-joke tone — playful and affectionate"
+  }`
+      : `"cardNotes": {
+    "heartfelt": "2-3 sentences, deeply personal to ${name}",
+    "funny": "1-2 sentences, warm humour referencing the ${occasion} or ${relationship} relationship",
+    "simple": "1 sentence, sincere and direct"
+  }`;
+
+    const trendingPicksField = isDeep
+      ? `,
+  "trendingPicks": [
+    {"item": "Trend-matched item 1", "reason": "because [reason from their answers]"},
+    {"item": "Trend-matched item 2", "reason": "because [reason from their answers]"},
+    {"item": "Trend-matched item 3", "reason": "because [reason from their answers]"}
+  ]`
+      : "";
+
+    const surpriseField = isDeep
+      ? `,
+  "surpriseNote": "Based on their feelings about surprises, include either a 'Wild Card' bold gift suggestion if they love surprises, or a note like 'Consider giving a hint before the occasion — the anticipation might mean as much as the gift' if they prefer knowing. If neutral, omit this field or set to null."`
+      : "";
+
     const userPrompt = `I'm choosing a gift for ${name}. Here's what I know:
 - Relationship: ${relationship}
 - Occasion: ${occasion}  
 - Budget: ₹${budget}
+- Mode: ${isDeep ? "Deep dive (15 questions)" : "Quick (6 questions)"}
 
-Here are 6 questions I answered about ${name}:
+Here are ${questions.length} questions I answered about ${name}:
 ${questions.map((q: string, i: number) => `Q: ${q}\nA: ${answerLabels[i]}`).join("\n\n")}
+${trendGuidance}
 
-Based on this, generate a JSON object with this exact structure:
+Based on ALL answers provided, generate a JSON object with this exact structure:
 {
-  "portrait": "A warm 3-4 sentence paragraph describing ${name}'s personality. Be specific, not generic. Reference their traits from the answers. Write like a perceptive friend, not a machine.",
+  ${portraitInstructions},
   "territories": [
     {
       "emoji": "relevant emoji",
       "name": "Territory name (creative, evocative)",
       "description": "One line about why this direction fits ${name}",
-      "giftIdeas": ["3 specific gift concepts (not product links) tailored to their personality and ₹${budget} budget"],
+      "giftIdeas": ["${giftIdeaCount} specific gift concepts (not product links) tailored to their personality and ₹${budget} budget"],${trendingField}
       "diyOption": "A make-it-yourself alternative",
       "customization": "How to personalise the gift",
-      "links": [{"label": "Store name", "url": "real URL to a relevant store like etsy.com, ugaoo.com, jaypore.com, uncommongoods.com, or zazzle.com with a relevant search query"}]
+      "links": [{"label": "Store name", "url": "real URL to a relevant store with a relevant search query"}]
     }
   ],
-  "cardNotes": {
-    "heartfelt": "2-3 sentences, deeply personal to ${name}",
-    "funny": "1-2 sentences, warm humour referencing the ${occasion} or ${relationship} relationship",
-    "simple": "1 sentence, sincere and direct"
-  }
+  ${cardNotesStructure}${trendingPicksField}${surpriseField}
 }
 
-Generate exactly 3 territories. Each territory should have exactly 3 gift ideas and 3 links. Make all shopping links real working URLs with relevant search queries.`;
+Generate exactly ${territoryCount} territories. Each territory must have exactly ${giftIdeaCount} gift ideas and ${linkCount} links. Make all shopping links real working URLs with relevant search queries.`;
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
@@ -81,10 +134,7 @@ Generate exactly 3 territories. Each territory should have exactly 3 gift ideas 
 
     const aiData = await response.json();
     let content = aiData.choices?.[0]?.message?.content || "";
-    
-    // Strip markdown code blocks if present
     content = content.replace(/```json\n?/g, "").replace(/```\n?/g, "").trim();
-    
     const result = JSON.parse(content);
 
     return new Response(JSON.stringify(result), {
