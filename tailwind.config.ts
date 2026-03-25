@@ -15,6 +15,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Playfair Display', 'Georgia', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -52,10 +53,16 @@ export default {
         },
         unwrap: {
           purple: "hsl(var(--unwrap-purple))",
+          "purple-vivid": "hsl(var(--unwrap-purple-vivid))",
           lavender: "hsl(var(--unwrap-lavender))",
           amber: "hsl(var(--unwrap-amber))",
+          coral: "hsl(var(--unwrap-coral))",
+          mint: "hsl(var(--unwrap-mint))",
           "purple-light": "hsl(var(--unwrap-purple-light))",
           "purple-soft": "hsl(var(--unwrap-purple-soft))",
+          "warm-white": "hsl(var(--unwrap-warm-white))",
+          text: "hsl(var(--unwrap-text))",
+          "text-secondary": "hsl(var(--unwrap-text-secondary))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
@@ -72,6 +79,14 @@ export default {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        xl: "1rem",
+        "2xl": "1.25rem",
+        "3xl": "1.5rem",
+      },
+      boxShadow: {
+        "card": "0 4px 24px rgba(0,0,0,0.08)",
+        "card-hover": "0 8px 32px rgba(0,0,0,0.12)",
+        "purple-glow": "0 0 0 3px rgba(124,58,237,0.15)",
       },
       keyframes: {
         "accordion-down": {
@@ -86,11 +101,19 @@ export default {
           "0%, 100%": { opacity: "0.6" },
           "50%": { opacity: "1" },
         },
+        "spring-bounce": {
+          "0%": { transform: "scale(1)" },
+          "30%": { transform: "scale(0.96)" },
+          "50%": { transform: "scale(1.02)" },
+          "70%": { transform: "scale(0.99)" },
+          "100%": { transform: "scale(1)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "pulse-soft": "pulse-soft 2s ease-in-out infinite",
+        "spring-bounce": "spring-bounce 0.4s ease-out",
       },
     },
   },
