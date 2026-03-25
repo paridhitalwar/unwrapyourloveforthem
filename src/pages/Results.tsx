@@ -20,7 +20,7 @@ const Results = () => {
     const storedName = sessionStorage.getItem("unwrap-name");
     const storedMode = sessionStorage.getItem("unwrap-mode") as QuizMode | null;
     if (!stored || !storedName) {
-      navigate("/");
+      navigate("/start");
       return;
     }
     setResult(JSON.parse(stored));
