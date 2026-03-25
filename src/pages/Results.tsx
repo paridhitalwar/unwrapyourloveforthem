@@ -20,7 +20,7 @@ const Results = () => {
     const storedName = sessionStorage.getItem("unwrap-name");
     const storedMode = sessionStorage.getItem("unwrap-mode") as QuizMode | null;
     if (!stored || !storedName) {
-      navigate("/");
+      navigate("/start");
       return;
     }
     setResult(JSON.parse(stored));
@@ -241,7 +241,7 @@ const Results = () => {
               sessionStorage.removeItem("unwrap-result");
               sessionStorage.removeItem("unwrap-name");
               sessionStorage.removeItem("unwrap-mode");
-              navigate("/");
+              navigate("/start");
             }}
             className="px-8 py-3 rounded-full border-[1.5px] border-primary text-primary font-semibold hover:gradient-purple hover:text-white hover:border-transparent transition-all duration-300"
           >
