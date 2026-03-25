@@ -241,7 +241,7 @@ const Results = () => {
               sessionStorage.removeItem("unwrap-result");
               sessionStorage.removeItem("unwrap-name");
               sessionStorage.removeItem("unwrap-mode");
-              navigate("/");
+              navigate("/start");
             }}
             className="px-8 py-3 rounded-full border-[1.5px] border-primary text-primary font-semibold hover:gradient-purple hover:text-white hover:border-transparent transition-all duration-300"
           >
