@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
-import { Button } from "@/components/ui/button";
+import Confetti from "@/components/Confetti";
 import type { GiftResult, QuizMode } from "@/lib/quiz-data";
+
+const stripeColors = ["#7C3AED", "#F59E0B", "#10B981", "#FF6B6B"];
+const stripeTextColors = ["text-unwrap-purple-vivid", "text-unwrap-amber", "text-unwrap-mint", "text-unwrap-coral"];
 
 const Results = () => {
   const navigate = useNavigate();
@@ -12,6 +15,7 @@ const Results = () => {
   const [mode, setMode] = useState<QuizMode>("quick");
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const stored = sessionStorage.getItem("unwrap-result");
     const storedName = sessionStorage.getItem("unwrap-name");
     const storedMode = sessionStorage.getItem("unwrap-mode") as QuizMode | null;
@@ -26,32 +30,35 @@ const Results = () => {
 
   if (!result) return null;
 
-  const isDeep = mode === "deep";
-  const territoryCount = result.territories.length;
-
   const cardNoteEntries = [
-    { label: "Heartfelt", text: result.cardNotes.heartfelt },
-    { label: "Funny & warm", text: result.cardNotes.funny },
-    { label: "Simple & sincere", text: result.cardNotes.simple },
-    ...(result.cardNotes.playful ? [{ label: "Playful inside-joke", text: result.cardNotes.playful }] : []),
+    { label: "Heartfelt", color: "bg-unwrap-purple-soft text-primary", text: result.cardNotes.heartfelt },
+    { label: "Funny & warm", color: "bg-amber-50 text-amber-700", text: result.cardNotes.funny },
+    { label: "Simple & sincere", color: "bg-emerald-50 text-emerald-700", text: result.cardNotes.simple },
+    ...(result.cardNotes.playful ? [{ label: "Inside joke", color: "bg-rose-50 text-rose-700", text: result.cardNotes.playful }] : []),
   ];
 
   return (
     <div className="min-h-screen bg-background">
+      <Confetti />
       <Navigation />
-      <main className="max-w-2xl mx-auto px-6 pt-8 pb-20">
+      <main className="max-w-2xl mx-auto px-4 sm:px-6 pt-6 pb-20">
         {/* Portrait */}
         <motion.section
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6 }}
           className="mb-10"
         >
-          <h2 className="text-sm font-medium text-muted-foreground mb-2">
-            Here's what I know about {name}
-          </h2>
-          <div className="p-6 rounded-xl bg-secondary border border-border">
-            <p className="text-foreground leading-relaxed text-[15px]">
+          <div className="gradient-purple rounded-3xl p-8 sm:p-10 relative overflow-hidden">
+            {/* Decorative shapes */}
+            <div className="absolute top-4 right-4 w-16 h-16 border border-white/10 rounded-lg rotate-12" />
+            <div className="absolute bottom-4 left-4 w-12 h-12 border border-white/10 rounded-lg -rotate-6" />
+            <div className="absolute top-1/2 right-1/4 w-8 h-8 bg-white/5 rounded-full" />
+
+            <p className="font-display italic text-white/60 text-sm uppercase tracking-[0.1em] mb-4">
+              Here's what I see in {name}
+            </p>
+            <p className="font-display text-white text-lg sm:text-xl leading-relaxed">
               {result.portrait}
             </p>
           </div>
@@ -59,74 +66,93 @@ const Results = () => {
 
         {/* Territories */}
         <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mb-10"
         >
-          <h2 className="text-sm font-medium text-muted-foreground mb-4">
-            {territoryCount === 4 ? "Four" : "Three"} directions to explore
+          <h2 className="font-display font-bold text-foreground text-xl mb-5">
+            {result.territories.length === 4 ? "Four" : "Three"} directions to explore
           </h2>
-          <div className="space-y-4">
+          <div className="space-y-5">
             {result.territories.map((territory, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 15 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.3 + idx * 0.15 }}
-                className="p-6 rounded-xl bg-card border border-border"
+                className="bg-card rounded-[20px] shadow-card hover:shadow-card-hover transition-shadow duration-300 overflow-hidden"
               >
-                <div className="flex items-start gap-3 mb-3">
-                  <span className="text-2xl">{territory.emoji}</span>
-                  <div>
-                    <h3 className="font-semibold text-primary text-base">{territory.name}</h3>
-                    <p className="text-sm text-muted-foreground">{territory.description}</p>
-                  </div>
-                </div>
+                <div className="flex">
+                  {/* Accent stripe */}
+                  <div className="w-1.5 flex-shrink-0" style={{ backgroundColor: stripeColors[idx % 4] }} />
 
-                <div className="ml-9 space-y-4">
-                  <div>
-                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-2">Gift ideas</p>
-                    <ul className="space-y-1.5">
-                      {territory.giftIdeas.map((idea, i) => (
-                        <li key={i} className="text-sm text-foreground flex items-start gap-2">
-                          <span className="text-accent mt-0.5">•</span>
-                          {idea}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {territory.trendingIdea && (
-                    <div className="p-3 rounded-lg bg-accent/10 border border-accent/20">
-                      <p className="text-sm text-foreground font-medium">📈 {territory.trendingIdea}</p>
+                  <div className="p-6 sm:p-8 flex-1">
+                    <div className="flex items-start gap-3 mb-1">
+                      <span className="text-2xl">{territory.emoji}</span>
+                      <div>
+                        <h3 className={`font-display font-bold text-[22px] ${stripeTextColors[idx % 4]}`}>
+                          {territory.name}
+                        </h3>
+                        <p className="text-[15px] italic text-muted-foreground mt-1">{territory.description}</p>
+                      </div>
                     </div>
-                  )}
 
-                  <div>
-                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1">Make it yourself</p>
-                    <p className="text-sm text-foreground">{territory.diyOption}</p>
-                  </div>
+                    <div className="mt-5 space-y-5 ml-0 sm:ml-9">
+                      {/* Gift ideas */}
+                      <div>
+                        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Gift ideas</p>
+                        <ul className="space-y-2">
+                          {territory.giftIdeas.map((idea, i) => (
+                            <li key={i} className="text-[15px] font-medium text-foreground flex items-start gap-2.5">
+                              <span className="w-2 h-2 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: stripeColors[idx % 4] }} />
+                              {idea}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
 
-                  <div>
-                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1">Customise it</p>
-                    <p className="text-sm text-foreground">{territory.customization}</p>
-                  </div>
+                      {/* Trending idea */}
+                      {territory.trendingIdea && (
+                        <div className="flex items-start gap-2 p-3 rounded-xl bg-amber-50 border border-amber-100">
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[11px] font-semibold whitespace-nowrap">🔥 Trending</span>
+                          <p className="text-sm font-medium text-foreground">{territory.trendingIdea}</p>
+                        </div>
+                      )}
 
-                  <div>
-                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-2">Find it here</p>
-                    <div className="flex flex-wrap gap-2">
-                      {territory.links.map((link, i) => (
-                        <a
-                          key={i}
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-xs px-3 py-1.5 rounded-full bg-secondary text-primary font-medium hover:bg-unwrap-purple-soft transition-colors"
-                        >
-                          {link.label}
-                        </a>
-                      ))}
+                      {/* DIY */}
+                      <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-100">
+                        <p className="text-sm text-foreground">
+                          <span className="font-semibold">✂️ Make it yourself: </span>
+                          {territory.diyOption}
+                        </p>
+                      </div>
+
+                      {/* Customization */}
+                      <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-100">
+                        <p className="text-sm text-foreground">
+                          <span className="font-semibold">✨ Personalise it: </span>
+                          {territory.customization}
+                        </p>
+                      </div>
+
+                      {/* Links */}
+                      <div>
+                        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Find it here</p>
+                        <div className="flex flex-wrap gap-2">
+                          {territory.links.map((link, i) => (
+                            <a
+                              key={i}
+                              href={link.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-[13px] px-4 py-2 rounded-full bg-card border border-border font-medium text-foreground hover:border-unwrap-purple-vivid hover:text-primary transition-all duration-200"
+                            >
+                              {link.label} ↗
+                            </a>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -135,7 +161,7 @@ const Results = () => {
           </div>
         </motion.section>
 
-        {/* Trending Picks (deep mode) */}
+        {/* Trending Picks */}
         {result.trendingPicks && result.trendingPicks.length > 0 && (
           <motion.section
             initial={{ opacity: 0, y: 20 }}
@@ -143,16 +169,18 @@ const Results = () => {
             transition={{ duration: 0.5, delay: 0.5 }}
             className="mb-10"
           >
-            <h2 className="text-sm font-medium text-muted-foreground mb-4">
-              📈 Trending right now for someone like {name}
-            </h2>
-            <div className="space-y-2">
-              {result.trendingPicks.map((pick, idx) => (
-                <div key={idx} className="p-4 rounded-lg bg-accent/10 border border-accent/20">
-                  <p className="text-sm font-medium text-foreground">{pick.item}</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">— {pick.reason}</p>
-                </div>
-              ))}
+            <div className="rounded-[20px] bg-amber-50 border border-amber-100 p-6 sm:p-7">
+              <h2 className="font-bold text-lg text-amber-800 mb-4">
+                📈 Trending for someone like {name}
+              </h2>
+              <div className="space-y-3">
+                {result.trendingPicks.map((pick, idx) => (
+                  <div key={idx} className="bg-card rounded-xl p-4 shadow-sm">
+                    <p className="text-sm font-medium text-foreground">{pick.item}</p>
+                    <p className="text-xs text-muted-foreground mt-1">— {pick.reason}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </motion.section>
         )}
@@ -165,7 +193,7 @@ const Results = () => {
             transition={{ duration: 0.5, delay: 0.55 }}
             className="mb-10"
           >
-            <div className="p-4 rounded-lg bg-secondary border border-border">
+            <div className="p-5 rounded-xl bg-unwrap-purple-soft border border-unwrap-purple-vivid/10">
               <p className="text-sm text-foreground italic">💡 {result.surpriseNote}</p>
             </div>
           </motion.section>
@@ -178,16 +206,24 @@ const Results = () => {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="mb-12"
         >
-          <h2 className="text-sm font-medium text-muted-foreground mb-4">
-            What to write in the card
-          </h2>
-          <div className="space-y-3">
-            {cardNoteEntries.map((note, idx) => (
-              <div key={idx} className="p-4 rounded-lg bg-card border border-border">
-                <p className="text-xs font-medium text-accent mb-1.5">{note.label}</p>
-                <p className="text-sm text-foreground leading-relaxed italic">"{note.text}"</p>
-              </div>
-            ))}
+          <div className="rounded-[20px] bg-unwrap-purple-soft/50 p-6 sm:p-7">
+            <h2 className="font-display font-bold text-xl text-primary mb-5">
+              💌 What to write in the card
+            </h2>
+            <div className="space-y-3">
+              {cardNoteEntries.map((note, idx) => (
+                <div key={idx} className="bg-card rounded-2xl p-5 shadow-sm">
+                  <span className={`inline-block text-[11px] font-semibold px-2.5 py-1 rounded-full mb-3 ${note.color}`}>
+                    {note.label}
+                  </span>
+                  <p className="font-display italic text-base text-foreground leading-relaxed">
+                    <span className="text-primary/30 text-2xl font-serif leading-none">"</span>
+                    {note.text}
+                    <span className="text-primary/30 text-2xl font-serif leading-none">"</span>
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </motion.section>
 
@@ -198,18 +234,19 @@ const Results = () => {
           transition={{ delay: 0.8 }}
           className="text-center"
         >
-          <Button
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={() => {
               sessionStorage.removeItem("unwrap-result");
               sessionStorage.removeItem("unwrap-name");
               sessionStorage.removeItem("unwrap-mode");
               navigate("/");
             }}
-            variant="outline"
-            className="px-8 h-11"
+            className="px-8 py-3 rounded-full border-[1.5px] border-primary text-primary font-semibold hover:gradient-purple hover:text-white hover:border-transparent transition-all duration-300"
           >
             Start over for someone else
-          </Button>
+          </motion.button>
         </motion.div>
       </main>
     </div>

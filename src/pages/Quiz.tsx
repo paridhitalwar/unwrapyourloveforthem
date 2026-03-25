@@ -2,10 +2,105 @@ import { useState, useCallback } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Navigation from "@/components/Navigation";
-import { quizQuestions, getQuestionsForMode, type QuizMode } from "@/lib/quiz-data";
+import { getQuestionsForMode, type QuizMode } from "@/lib/quiz-data";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { generateFallback } from "@/lib/quiz-fallback";
+
+const optionEmojis: Record<number, string[]> = {
+  1: ["☕", "💬", "🎨", "✅"],
+  2: ["🤩", "💭", "🔧", "😊"],
+  3: ["✨", "🏡", "🧘", "🎭"],
+  4: ["🌱", "⚡", "🏖️", "🔄"],
+  5: ["💎", "🎪", "🫶", "🎁"],
+  6: ["🎂", "🧭", "🔥", "🛍️"],
+  7: ["🧠", "⏰", "🤝", "💝"],
+  8: ["🧖", "🎯", "🖼️", "✈️"],
+  9: ["💌", "📦", "🎭", "😮"],
+  10: ["💪", "🕯️", "🏆", "🌸"],
+  11: ["📚", "🦋", "📢", "🤫"],
+  12: ["🎊", "🗣️", "🚪", "👀"],
+  13: ["❤️", "😄", "😜", "🤗"],
+  14: ["📿", "🌅", "👥", "🎒"],
+  15: ["🎉", "🤔", "😰", "🤷"],
+};
+
+const GiftBoxAnimation = () => (
+  <div className="relative w-32 h-32 mx-auto mb-8">
+    {/* Glow */}
+    <div className="absolute inset-0 rounded-2xl bg-unwrap-amber/20 gift-box-glow" />
+    {/* Box base */}
+    <div className="absolute bottom-4 left-4 right-4 h-16 rounded-xl bg-unwrap-amber/80 border-2 border-white/30" />
+    {/* Box lid */}
+    <div className="absolute bottom-16 left-2 right-2 h-8 rounded-xl bg-unwrap-amber border-2 border-white/30 gift-box-lid" />
+    {/* Ribbon vertical */}
+    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-4 h-20 bg-white/60 rounded-sm" />
+    {/* Ribbon horizontal */}
+    <div className="absolute bottom-12 left-4 right-4 h-4 bg-white/60 rounded-sm" />
+    {/* Ribbon bow left */}
+    <div className="absolute bottom-[72px] left-[calc(50%-20px)] w-5 h-5 rounded-full border-2 border-white/60 bg-transparent gift-box-ribbon-left origin-right" />
+    {/* Ribbon bow right */}
+    <div className="absolute bottom-[72px] left-[calc(50%+4px)] w-5 h-5 rounded-full border-2 border-white/60 bg-transparent gift-box-ribbon-right origin-left" />
+  </div>
+);
+
+const LoadingScreen = ({ mode, loadingText }: { mode: QuizMode; loadingText: string }) => {
+  const cyclingTexts = [
+    "Thinking about who they are...",
+    "Connecting the patterns...",
+    "Almost ready...",
+  ];
+
+  return (
+    <div className="min-h-screen gradient-purple flex flex-col items-center justify-center px-6">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-center"
+      >
+        <GiftBoxAnimation />
+
+        <h2 className="font-display italic text-white text-[28px] mb-3">
+          {loadingText}
+        </h2>
+
+        {mode === "deep" && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="text-white/60 text-base mb-8"
+          >
+            15 answers. One person. Let's find what fits.
+          </motion.p>
+        )}
+
+        <div className="h-6 mt-6">
+          {cyclingTexts.map((text, idx) => (
+            <motion.p
+              key={text}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{
+                opacity: [0, 1, 1, 0],
+                y: [8, 0, 0, -8],
+              }}
+              transition={{
+                duration: 3,
+                delay: idx * 3,
+                repeat: Infinity,
+                repeatDelay: (cyclingTexts.length - 1) * 3,
+              }}
+              className="text-white/50 text-sm absolute left-0 right-0"
+            >
+              {text}
+            </motion.p>
+          ))}
+        </div>
+      </motion.div>
+    </div>
+  );
+};
 
 const Quiz = () => {
   const navigate = useNavigate();
@@ -25,6 +120,7 @@ const Quiz = () => {
   const [loadingText, setLoadingText] = useState("Reading between the lines...");
 
   const question = activeQuestions[currentQ];
+  const questionId = question.id;
 
   const handleSelect = useCallback(async (value: string) => {
     const newAnswers = [...answers, value];
@@ -79,7 +175,7 @@ const Quiz = () => {
       } catch (err) {
         clearInterval(interval);
         console.error("Generation error:", err);
-        toast.error("Something went wrong. Using thoughtful defaults instead.");
+        toast.error("We're still thinking... using thoughtful defaults instead 🎁");
 
         const fallback = generateFallback(name, relationship, occasion, budget, newAnswers, mode);
         sessionStorage.setItem("unwrap-result", JSON.stringify(fallback));
@@ -91,47 +187,31 @@ const Quiz = () => {
   }, [currentQ, answers, name, relationship, occasion, budget, mode, navigate, activeQuestions, totalQuestions]);
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Navigation />
-        <div className="flex flex-col items-center justify-center min-h-[70vh] px-6">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center"
-          >
-            <div className="w-16 h-16 mx-auto mb-8 rounded-full bg-secondary flex items-center justify-center">
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full"
-              />
-            </div>
-            <h2 className="text-xl font-semibold text-primary mb-2">
-              Generating your gift direction...
-            </h2>
-            <p className="text-muted-foreground animate-pulse-soft">{loadingText}</p>
-          </motion.div>
-        </div>
-      </div>
-    );
+    return <LoadingScreen mode={mode} loadingText={loadingText} />;
   }
+
+  const emojis = optionEmojis[questionId] || ["•", "•", "•", "•"];
+
+  // Render name in purple within the question text
+  const questionText = question.question(name);
+  const parts = questionText.split(name);
 
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
       <main className="max-w-lg mx-auto px-6 pt-8 pb-20">
+        {/* Progress */}
         <div className="mb-8">
-          <div className="flex justify-between text-xs text-muted-foreground mb-2">
-            <span>Q{currentQ + 1} of {totalQuestions}</span>
+          <div className="flex justify-between text-[13px] text-muted-foreground mb-2">
+            <span className="font-medium">Q{currentQ + 1} of {totalQuestions}</span>
             <span className="capitalize">{mode} mode</span>
           </div>
-          <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">
+          <div className="w-full h-1.5 bg-unwrap-purple-soft rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-primary rounded-full"
+              className="h-full rounded-full gradient-progress"
               initial={{ width: 0 }}
               animate={{ width: `${((currentQ + 1) / totalQuestions) * 100}%` }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
             />
           </div>
         </div>
@@ -139,25 +219,35 @@ const Quiz = () => {
         <AnimatePresence mode="wait">
           <motion.div
             key={currentQ}
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 60 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -30 }}
-            transition={{ duration: 0.3 }}
+            exit={{ opacity: 0, x: -60 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
           >
-            <h2 className="text-xl font-semibold text-primary mb-6 leading-relaxed">
-              {question.question(name)}
+            <h2 className="font-display font-bold text-foreground text-[26px] mb-8 leading-snug text-center">
+              {parts.map((part, i) => (
+                <span key={i}>
+                  {part}
+                  {i < parts.length - 1 && <span className="text-primary">{name}</span>}
+                </span>
+              ))}
             </h2>
 
             <div className="space-y-3">
-              {question.options.map((option) => (
+              {question.options.map((option, idx) => (
                 <motion.button
                   key={option.value}
-                  whileHover={{ scale: 1.01 }}
-                  whileTap={{ scale: 0.99 }}
+                  whileHover={{ y: -2, boxShadow: "0 4px 24px rgba(0,0,0,0.08)" }}
+                  whileTap={{ scale: 0.98 }}
                   onClick={() => handleSelect(option.value)}
-                  className="w-full text-left p-4 rounded-lg border border-border bg-card hover:border-primary hover:bg-secondary transition-all duration-200 text-sm leading-relaxed text-foreground"
+                  className="w-full text-left p-5 rounded-2xl border-[1.5px] border-border bg-card hover:border-unwrap-purple-vivid hover:bg-unwrap-purple-soft/30 transition-all duration-200 group"
                 >
-                  {option.label}
+                  <div className="flex items-start gap-3">
+                    <span className="text-xl mt-0.5">{emojis[idx]}</span>
+                    <span className="text-[15px] font-medium text-foreground leading-relaxed group-hover:text-primary transition-colors">
+                      {option.label}
+                    </span>
+                  </div>
                 </motion.button>
               ))}
             </div>
