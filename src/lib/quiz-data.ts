@@ -169,10 +169,10 @@ export const quizQuestions: QuizQuestion[] = [
     deepOnly: true,
     question: (name) => `What does ${name} tend to hold onto?`,
     options: [
-      { label: "Objects — sentimental, keeps everything meaningful", value: "objects" },
-      { label: "Memories — experiences matter more than possessions", value: "memories" },
-      { label: "People — what matters is who they were with", value: "people" },
-      { label: "Nothing really — travels light, doesn't attach to things", value: "nothing" },
+      { label: "Objects: sentimental, keeps everything meaningful", value: "objects" },
+      { label: "Memories: experiences matter more than possessions", value: "memories" },
+      { label: "People: what matters is who they were with", value: "people" },
+      { label: "Nothing really, travels light, doesn't attach to things", value: "nothing" },
     ],
   },
   {
