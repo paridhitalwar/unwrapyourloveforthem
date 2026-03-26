@@ -136,10 +136,10 @@ export const quizQuestions: QuizQuestion[] = [
     deepOnly: true,
     question: (name) => `When ${name} gets into something, they...`,
     options: [
-      { label: "Go completely deep — obsess, research, become the expert", value: "deep-diver" },
+      { label: "Go completely deep: obsess, research, become the expert", value: "deep-diver" },
       { label: "Explore it casually then move on to the next thing", value: "explorer" },
       { label: "Want to share it with everyone immediately", value: "sharer" },
-      { label: "Keep it private — it's their personal thing", value: "private" },
+      { label: "Keep it private, it's their personal thing", value: "private" },
     ],
   },
   {
