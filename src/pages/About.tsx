@@ -1,54 +1,85 @@
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
-import { Heart, MessageCircle, Gift } from "lucide-react";
 
 const steps = [
-  { icon: Heart, title: "Tell us about the person", desc: "Share their name, your relationship, and the occasion", color: "bg-rose-50 text-rose-500" },
-  { icon: MessageCircle, title: "Answer questions about who they are", desc: "Quick, thoughtful prompts to help us understand them", color: "bg-unwrap-purple-soft text-primary" },
-  { icon: Gift, title: "Get a personalised gift direction", desc: "Not a product list — a thinking partner for your gift", color: "bg-amber-50 text-amber-600" },
+  {
+    num: "01",
+    icon: "⚙️",
+    iconBg: "bg-unwrap-purple-soft",
+    title: "Tell us about the person",
+    desc: "Share the subtle nuances that make them unique. No generic keywords, just their essence.",
+  },
+  {
+    num: "02",
+    icon: "❓",
+    iconBg: "bg-amber-50",
+    title: "Answer 6–15 questions",
+    desc: "Our AI curator asks intentional questions to narrow down the invisible threads of a perfect gift.",
+  },
+  {
+    num: "03",
+    icon: "✨",
+    iconBg: "bg-unwrap-purple-soft",
+    title: "Get your gift direction",
+    desc: 'Receive a curated strategy, not just products, but the "why" behind the suggestion.',
+  },
 ];
 
 const About = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      <main className="max-w-lg mx-auto px-6 pt-12 pb-20">
+      <main className="max-w-lg mx-auto px-6 pt-10 pb-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="font-display font-bold text-3xl text-primary mb-4">What is Unwrap?</h1>
-          <p className="text-foreground leading-relaxed mb-2 text-base">
-            Unwrap helps you think before you search. It's not a gift shop. It's a thinking partner.
-          </p>
-          <p className="text-muted-foreground text-sm leading-relaxed mb-10">
-            Great gifts don't start with a product catalogue — they start with understanding the person. 
-            Unwrap asks the right questions so you feel confident in your direction before you ever open a shopping tab.
+          {/* Hero heading */}
+          <h1 className="font-display font-bold text-3xl md:text-4xl text-foreground mb-4 leading-tight">
+            Unwrap helps you think before you search.
+          </h1>
+          <p className="text-muted-foreground text-base leading-relaxed mb-12">
+            Gift-giving is an art form. Most search engines give you lists; we give you clarity.
           </p>
 
-          <h2 className="font-display font-semibold text-xl text-primary mb-6">How it works</h2>
-          <div className="space-y-5 mb-12">
+          {/* Steps */}
+          <div className="space-y-8 mb-14">
             {steps.map((step, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 + idx * 0.15 }}
-                className="flex items-start gap-4"
+                className="flex items-start gap-5"
               >
-                <div className={`w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0 ${step.color}`}>
-                  <step.icon className="w-5 h-5" />
+                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 ${step.iconBg}`}>
+                  <span className="text-xl">{step.icon}</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground text-[15px]">{step.title}</h3>
-                  <p className="text-[13px] text-muted-foreground mt-0.5">{step.desc}</p>
+                  <p className="text-xs font-semibold text-primary uppercase tracking-[0.12em] mb-1">
+                    Step {step.num}
+                  </p>
+                  <h3 className="font-semibold text-foreground text-lg mb-1">{step.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
                 </div>
               </motion.div>
             ))}
           </div>
 
-          <p className="text-xs text-muted-foreground text-center">
+          {/* Quote */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7 }}
+            className="text-center mb-10"
+          >
+            <p className="font-display italic text-xl md:text-2xl text-foreground leading-snug">
+              "It's not a gift shop. It's a thinking partner."
+            </p>
+          </motion.div>
+
+          <p className="text-xs text-muted-foreground text-center uppercase tracking-[0.12em]">
             Built as a concept MVP for a product design project
           </p>
         </motion.div>

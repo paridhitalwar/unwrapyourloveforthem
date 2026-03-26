@@ -31,7 +31,6 @@ const Landing = () => {
           <span className="font-display font-bold text-primary text-2xl tracking-tight">
             🎁 Unwrap
           </span>
-          {/* Desktop links */}
           <div className="hidden md:flex items-center gap-8">
             <button onClick={() => scrollTo("how-it-works")} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
               How it works
@@ -46,7 +45,6 @@ const Landing = () => {
               Try it free
             </button>
           </div>
-          {/* Mobile hamburger */}
           <button onClick={() => setMenuOpen(true)} className="md:hidden p-2 text-foreground">
             <Menu className="w-6 h-6" />
           </button>
@@ -69,7 +67,6 @@ const Landing = () => {
 
       {/* HERO */}
       <section className="min-h-screen flex flex-col items-center justify-center relative px-5 pt-16">
-        {/* Decorative bg */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] md:w-[800px] md:h-[800px] rounded-full bg-unwrap-purple-soft/50 blur-3xl" />
           <motion.div
@@ -95,29 +92,24 @@ const Landing = () => {
           transition={{ duration: 0.7 }}
           className="text-center relative z-10 max-w-2xl"
         >
-          {/* Badge */}
           <span className="inline-block text-[13px] font-semibold px-4 py-1.5 rounded-full bg-amber-50 text-amber-800 mb-6">
             ✨ AI-powered gifting companion
           </span>
 
-          {/* Headline */}
           <h1 className="font-display font-bold text-[64px] md:text-[96px] leading-[0.95] tracking-[-0.02em] mb-3 bg-gradient-to-br from-primary to-unwrap-purple-vivid bg-clip-text text-transparent">
             Unwrap
           </h1>
 
-          {/* Subheadline */}
           <p className="font-display italic text-xl md:text-[28px] text-muted-foreground mb-5">
             Because every great gift starts with understanding.
           </p>
 
-          {/* Descriptor */}
           <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-[560px] mx-auto mb-8">
             Stop browsing. Start understanding.
             <br className="hidden md:block" />{" "}
-            Unwrap helps you figure out the perfect gift for the people you love — before you search for it.
+            Unwrap helps you figure out the perfect gift for the people you love, before you search for it.
           </p>
 
-          {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-5">
             <motion.button
               whileHover={{ scale: 1.02 }}
@@ -142,7 +134,6 @@ const Landing = () => {
           </p>
         </motion.div>
 
-        {/* Scroll indicator */}
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
@@ -150,6 +141,23 @@ const Landing = () => {
         >
           <ChevronDown className="w-6 h-6" />
         </motion.div>
+      </section>
+
+      {/* STATS STRIP */}
+      <section className="gradient-purple py-14 md:py-16">
+        <div className="max-w-5xl mx-auto px-5 md:px-8 flex flex-col md:flex-row items-center justify-center gap-10 md:gap-0 md:divide-x md:divide-white/20">
+          {[
+            { num: "$10.1B", label: "wasted on unwanted gifts yearly" },
+            { num: "70%", label: "find gift cards impersonal" },
+            { num: "2–4 hrs", label: "average time spent deciding one gift" },
+          ].map((stat, idx) => (
+            <div key={idx} className="text-center px-8 md:px-12">
+              <p className="font-display font-bold text-4xl md:text-5xl text-unwrap-amber mb-2">{stat.num}</p>
+              <p className="text-white/80 text-sm md:text-base">{stat.label}</p>
+              {idx < 2 && <div className="md:hidden w-16 h-px bg-white/20 mx-auto mt-8" />}
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* HOW IT WORKS */}
@@ -166,9 +174,9 @@ const Landing = () => {
 
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { num: "01", numColor: "text-unwrap-purple-vivid", emoji: "💭", title: "Tell me about them", body: "Share who you're gifting — their name, your relationship, the occasion. That's all we need to start." },
-              { num: "02", numColor: "text-unwrap-amber", emoji: "🧠", title: "Answer 6–15 questions", body: "We ask about their personality, life season, aesthetic, and what makes them tick. Not the occasion — the person." },
-              { num: "03", numColor: "text-unwrap-coral", emoji: "🎁", title: "Get your gift direction", body: "Receive a personalised gift direction — not a product list. We tell you what kind of gift fits and why." },
+              { num: "01", numColor: "text-unwrap-purple-vivid", emoji: "💭", title: "Tell me about them", body: "Share who you're gifting, their name, your relationship, the occasion. That's all we need to start." },
+              { num: "02", numColor: "text-unwrap-amber", emoji: "🧠", title: "Answer 6–15 questions", body: "We ask about their personality, life season, aesthetic, and what makes them tick. Not the occasion, the person." },
+              { num: "03", numColor: "text-unwrap-coral", emoji: "🎁", title: "Get your gift direction", body: "Receive a personalised gift direction, not a product list. We tell you what kind of gift fits and why." },
             ].map((card, idx) => (
               <motion.div
                 key={idx}
@@ -196,7 +204,6 @@ const Landing = () => {
           </h2>
 
           <div className="grid md:grid-cols-2 gap-8 items-start">
-            {/* Pain points */}
             <div className="space-y-3">
               {[
                 "😰 You spend 3 hours on Amazon and still aren't sure",
@@ -217,7 +224,6 @@ const Landing = () => {
               ))}
             </div>
 
-            {/* Solution */}
             <motion.div
               initial={{ opacity: 0, x: 10 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -230,7 +236,7 @@ const Landing = () => {
                 <br /><br />
                 Unwrap helps you understand the person first.
                 <br /><br />
-                We ask the questions you'd ask a close friend who knows the recipient — personality, current life season, what they'd never buy themselves.
+                We ask the questions you'd ask a close friend who knows the recipient: personality, current life season, what they'd never buy themselves.
                 <br /><br />
                 Then we give you a gift direction that actually makes sense for THIS person, right now. Not a generic list.
               </p>
@@ -240,27 +246,10 @@ const Landing = () => {
                 onClick={() => navigate("/start")}
                 className="px-8 py-3 rounded-full gradient-purple text-white font-semibold text-[15px] shadow-lg hover:shadow-xl transition-shadow"
               >
-                Try it — it's free →
+                Try it, it's free →
               </motion.button>
             </motion.div>
           </div>
-        </div>
-      </section>
-
-      {/* STATS STRIP */}
-      <section className="gradient-purple py-14 md:py-16">
-        <div className="max-w-5xl mx-auto px-5 md:px-8 flex flex-col md:flex-row items-center justify-center gap-10 md:gap-0 md:divide-x md:divide-white/20">
-          {[
-            { num: "$10.1B", label: "wasted on unwanted gifts yearly" },
-            { num: "70%", label: "find gift cards impersonal" },
-            { num: "2–4 hrs", label: "average time spent deciding one gift" },
-          ].map((stat, idx) => (
-            <div key={idx} className="text-center px-8 md:px-12">
-              <p className="font-display font-bold text-4xl md:text-5xl text-unwrap-amber mb-2">{stat.num}</p>
-              <p className="text-white/80 text-sm md:text-base">{stat.label}</p>
-              {idx < 2 && <div className="md:hidden w-16 h-px bg-white/20 mx-auto mt-8" />}
-            </div>
-          ))}
         </div>
       </section>
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Confetti from "@/components/Confetti";
 import type { GiftResult, QuizMode } from "@/lib/quiz-data";
@@ -13,6 +14,7 @@ const Results = () => {
   const [result, setResult] = useState<GiftResult | null>(null);
   const [name, setName] = useState("");
   const [mode, setMode] = useState<QuizMode>("quick");
+  const [openTerritory, setOpenTerritory] = useState<number>(0);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -37,6 +39,10 @@ const Results = () => {
     ...(result.cardNotes.playful ? [{ label: "Inside joke", color: "bg-rose-50 text-rose-700", text: result.cardNotes.playful }] : []),
   ];
 
+  const toggleTerritory = (idx: number) => {
+    setOpenTerritory(openTerritory === idx ? -1 : idx);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Confetti />
@@ -50,7 +56,6 @@ const Results = () => {
           className="mb-10"
         >
           <div className="gradient-purple rounded-3xl p-8 sm:p-10 relative overflow-hidden">
-            {/* Decorative shapes */}
             <div className="absolute top-4 right-4 w-16 h-16 border border-white/10 rounded-lg rotate-12" />
             <div className="absolute bottom-4 left-4 w-12 h-12 border border-white/10 rounded-lg -rotate-6" />
             <div className="absolute top-1/2 right-1/4 w-8 h-8 bg-white/5 rounded-full" />
@@ -64,7 +69,7 @@ const Results = () => {
           </div>
         </motion.section>
 
-        {/* Territories */}
+        {/* Territories as Accordion */}
         <motion.section
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -74,90 +79,104 @@ const Results = () => {
           <h2 className="font-display font-bold text-foreground text-xl mb-5">
             {result.territories.length === 4 ? "Four" : "Three"} directions to explore
           </h2>
-          <div className="space-y-5">
-            {result.territories.map((territory, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.3 + idx * 0.15 }}
-                className="bg-card rounded-[20px] shadow-card hover:shadow-card-hover transition-shadow duration-300 overflow-hidden"
-              >
-                <div className="flex">
-                  {/* Accent stripe */}
-                  <div className="w-1.5 flex-shrink-0" style={{ backgroundColor: stripeColors[idx % 4] }} />
-
-                  <div className="p-6 sm:p-8 flex-1">
-                    <div className="flex items-start gap-3 mb-1">
-                      <span className="text-2xl">{territory.emoji}</span>
-                      <div>
-                        <h3 className={`font-display font-bold text-[22px] ${stripeTextColors[idx % 4]}`}>
-                          {territory.name}
-                        </h3>
-                        <p className="text-[15px] italic text-muted-foreground mt-1">{territory.description}</p>
-                      </div>
-                    </div>
-
-                    <div className="mt-5 space-y-5 ml-0 sm:ml-9">
-                      {/* Gift ideas */}
-                      <div>
-                        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Gift ideas</p>
-                        <ul className="space-y-2">
-                          {territory.giftIdeas.map((idea, i) => (
-                            <li key={i} className="text-[15px] font-medium text-foreground flex items-start gap-2.5">
-                              <span className="w-2 h-2 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: stripeColors[idx % 4] }} />
-                              {idea}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {/* Trending idea */}
-                      {territory.trendingIdea && (
-                        <div className="flex items-start gap-2 p-3 rounded-xl bg-amber-50 border border-amber-100">
-                          <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[11px] font-semibold whitespace-nowrap">🔥 Trending</span>
-                          <p className="text-sm font-medium text-foreground">{territory.trendingIdea}</p>
+          <div className="space-y-3">
+            {result.territories.map((territory, idx) => {
+              const isOpen = openTerritory === idx;
+              return (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.3 + idx * 0.1 }}
+                  className="bg-card rounded-[20px] shadow-card overflow-hidden"
+                >
+                  <div className="flex">
+                    <div className="w-1.5 flex-shrink-0" style={{ backgroundColor: stripeColors[idx % 4] }} />
+                    <div className="flex-1">
+                      {/* Accordion Header */}
+                      <button
+                        onClick={() => toggleTerritory(idx)}
+                        className="w-full text-left p-5 sm:p-6 flex items-center gap-3"
+                      >
+                        <span className="text-2xl">{territory.emoji}</span>
+                        <div className="flex-1">
+                          <h3 className={`font-display font-bold text-lg ${stripeTextColors[idx % 4]}`}>
+                            {territory.name}
+                          </h3>
+                          <p className="text-sm italic text-muted-foreground mt-0.5 line-clamp-1">{territory.description}</p>
                         </div>
-                      )}
+                        <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform duration-300 flex-shrink-0 ${isOpen ? "rotate-180" : ""}`} />
+                      </button>
 
-                      {/* DIY */}
-                      <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-100">
-                        <p className="text-sm text-foreground">
-                          <span className="font-semibold">✂️ Make it yourself: </span>
-                          {territory.diyOption}
-                        </p>
-                      </div>
+                      {/* Accordion Content */}
+                      <motion.div
+                        initial={false}
+                        animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-5 sm:px-6 pb-6 space-y-5">
+                          {/* Gift ideas */}
+                          <div>
+                            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Gift ideas</p>
+                            <ul className="space-y-2">
+                              {territory.giftIdeas.map((idea, i) => (
+                                <li key={i} className="text-[15px] font-medium text-foreground flex items-start gap-2.5">
+                                  <span className="w-2 h-2 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: stripeColors[idx % 4] }} />
+                                  {idea}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
 
-                      {/* Customization */}
-                      <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-100">
-                        <p className="text-sm text-foreground">
-                          <span className="font-semibold">✨ Personalise it: </span>
-                          {territory.customization}
-                        </p>
-                      </div>
+                          {/* Trending idea */}
+                          {territory.trendingIdea && (
+                            <div className="flex items-start gap-2 p-3 rounded-xl bg-amber-50 border border-amber-100">
+                              <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[11px] font-semibold whitespace-nowrap">🔥 Trending</span>
+                              <p className="text-sm font-medium text-foreground">{territory.trendingIdea}</p>
+                            </div>
+                          )}
 
-                      {/* Links */}
-                      <div>
-                        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Find it here</p>
-                        <div className="flex flex-wrap gap-2">
-                          {territory.links.map((link, i) => (
-                            <a
-                              key={i}
-                              href={link.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-[13px] px-4 py-2 rounded-full bg-card border border-border font-medium text-foreground hover:border-unwrap-purple-vivid hover:text-primary transition-all duration-200"
-                            >
-                              {link.label} ↗
-                            </a>
-                          ))}
+                          {/* DIY */}
+                          <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-100">
+                            <p className="text-sm text-foreground">
+                              <span className="font-semibold">✂️ Make it yourself: </span>
+                              {territory.diyOption}
+                            </p>
+                          </div>
+
+                          {/* Customization */}
+                          <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-100">
+                            <p className="text-sm text-foreground">
+                              <span className="font-semibold">✨ Personalise it: </span>
+                              {territory.customization}
+                            </p>
+                          </div>
+
+                          {/* Links */}
+                          <div>
+                            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Find it here</p>
+                            <div className="flex flex-wrap gap-2">
+                              {territory.links.map((link, i) => (
+                                <a
+                                  key={i}
+                                  href={link.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-[13px] px-4 py-2 rounded-full bg-card border border-border font-medium text-foreground hover:border-unwrap-purple-vivid hover:text-primary transition-all duration-200"
+                                >
+                                  {link.label} ↗
+                                </a>
+                              ))}
+                            </div>
+                          </div>
                         </div>
-                      </div>
+                      </motion.div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         </motion.section>
 
@@ -177,7 +196,7 @@ const Results = () => {
                 {result.trendingPicks.map((pick, idx) => (
                   <div key={idx} className="bg-card rounded-xl p-4 shadow-sm">
                     <p className="text-sm font-medium text-foreground">{pick.item}</p>
-                    <p className="text-xs text-muted-foreground mt-1">— {pick.reason}</p>
+                    <p className="text-xs text-muted-foreground mt-1">Because {pick.reason}</p>
                   </div>
                 ))}
               </div>
