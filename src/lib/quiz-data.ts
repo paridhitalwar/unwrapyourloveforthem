@@ -33,7 +33,7 @@ export const quizQuestions: QuizQuestion[] = [
       { label: "Is out meeting people, probably at a café or event", value: "social" },
       { label: "Is home with one close friend, deep in conversation", value: "intimate" },
       { label: "Is alone doing something creative or absorbing", value: "solitary" },
-      { label: "Is running errands or ticking off their to-do list", value: "practical" },
+      { label: "Is running errands or ticking off their to do list", value: "practical" },
     ],
   },
   {
@@ -60,10 +60,10 @@ export const quizQuestions: QuizQuestion[] = [
     id: 4,
     question: (name) => `Right now, ${name}'s life feels...`,
     options: [
-      { label: "Like a new chapter — something big just started or changed", value: "new-chapter" },
-      { label: "Busy and full — lots happening, not much breathing room", value: "busy" },
-      { label: "Settled and steady — comfortable with where things are", value: "settled" },
-      { label: "A bit in-between — figuring out what comes next", value: "transitional" },
+      { label: "Like a new chapter: something big just started or changed", value: "new-chapter" },
+      { label: "Busy and full: lots happening, not much breathing room", value: "busy" },
+      { label: "Settled and steady: comfortable with where things are", value: "settled" },
+      { label: "A bit in between, figuring out what comes next", value: "transitional" },
     ],
   },
   {
@@ -93,9 +93,9 @@ export const quizQuestions: QuizQuestion[] = [
     question: (name) => `How does ${name} most feel appreciated?`,
     options: [
       { label: "When someone remembers something small they mentioned once", value: "memory" },
-      { label: "When someone gives them real uninterrupted time and attention", value: "time" },
+      { label: "When someone gives them real, uninterrupted time and attention", value: "time" },
       { label: "When someone does something practical to make their life easier", value: "acts" },
-      { label: "When someone gives something that shows genuine thinking of them", value: "gifts" },
+      { label: "When someone gives something that shows genuine thought", value: "gifts" },
     ],
   },
   {
@@ -103,10 +103,10 @@ export const quizQuestions: QuizQuestion[] = [
     deepOnly: true,
     question: (name) => `${name} would probably never spend money on themselves for...`,
     options: [
-      { label: "Something purely for relaxation — always feels too indulgent", value: "relaxation" },
-      { label: "Something expensive for their hobby — hard to justify", value: "hobby" },
-      { label: "Something decorative or aesthetic — seems unnecessary", value: "decorative" },
-      { label: "An experience — prefers saving for practical things", value: "experience" },
+      { label: "Something purely for relaxation, always feels too indulgent", value: "relaxation" },
+      { label: "Something expensive for their hobby, hard to justify", value: "hobby" },
+      { label: "Something decorative or aesthetic, seems unnecessary", value: "decorative" },
+      { label: "An experience, prefers saving for practical things", value: "experience" },
     ],
   },
   {
@@ -125,10 +125,10 @@ export const quizQuestions: QuizQuestion[] = [
     deepOnly: true,
     question: (name) => `How does ${name} treat themselves?`,
     options: [
-      { label: "Rarely — always putting others or work first", value: "rarely" },
-      { label: "Intentionally — has rituals and routines they protect", value: "intentional" },
-      { label: "Occasionally — only when they feel they've earned it", value: "occasionally" },
-      { label: "Freely — no guilt, enjoys life's small pleasures", value: "freely" },
+      { label: "Rarely, always putting others or work first", value: "rarely" },
+      { label: "Intentionally, has rituals and routines they protect", value: "intentional" },
+      { label: "Occasionally, only when they feel they've earned it", value: "occasionally" },
+      { label: "Freely, no guilt, enjoys life's small pleasures", value: "freely" },
     ],
   },
   {
@@ -136,10 +136,10 @@ export const quizQuestions: QuizQuestion[] = [
     deepOnly: true,
     question: (name) => `When ${name} gets into something, they...`,
     options: [
-      { label: "Go completely deep — obsess, research, become the expert", value: "deep-diver" },
+      { label: "Go completely deep: obsess, research, become the expert", value: "deep-diver" },
       { label: "Explore it casually then move on to the next thing", value: "explorer" },
       { label: "Want to share it with everyone immediately", value: "sharer" },
-      { label: "Keep it private — it's their personal thing", value: "private" },
+      { label: "Keep it private, it's their personal thing", value: "private" },
     ],
   },
   {
@@ -147,10 +147,10 @@ export const quizQuestions: QuizQuestion[] = [
     deepOnly: true,
     question: (name) => `In a group setting, ${name} is usually...`,
     options: [
-      { label: "The one who brings everyone together — hosts and connects", value: "connector" },
+      { label: "The one who brings everyone together, hosts and connects", value: "connector" },
       { label: "Having one deep conversation in the corner", value: "deep-talker" },
       { label: "Present but quietly slips away when energy runs low", value: "quiet-exit" },
-      { label: "The observer — speaks only when it truly counts", value: "observer" },
+      { label: "The observer, speaks only when it truly counts", value: "observer" },
     ],
   },
   {
@@ -158,10 +158,10 @@ export const quizQuestions: QuizQuestion[] = [
     deepOnly: true,
     question: (name) => `Your relationship with ${name} is mostly...`,
     options: [
-      { label: "Deep and emotionally honest — you talk about real things", value: "deep" },
-      { label: "Warm and easy — comfortable, lots of laughs", value: "warm" },
-      { label: "Fun and playful — inside jokes and running gags", value: "playful" },
-      { label: "Caring and respectful — genuine fondness, still growing", value: "caring" },
+      { label: "Deep and emotionally honest, you talk about real things", value: "deep" },
+      { label: "Warm and easy, comfortable, lots of laughs", value: "warm" },
+      { label: "Fun and playful, inside jokes and running gags", value: "playful" },
+      { label: "Caring and respectful, genuine fondness, still growing", value: "caring" },
     ],
   },
   {
@@ -169,10 +169,10 @@ export const quizQuestions: QuizQuestion[] = [
     deepOnly: true,
     question: (name) => `What does ${name} tend to hold onto?`,
     options: [
-      { label: "Objects — sentimental, keeps everything meaningful", value: "objects" },
-      { label: "Memories — experiences matter more than possessions", value: "memories" },
-      { label: "People — what matters is who they were with", value: "people" },
-      { label: "Nothing really — travels light, doesn't attach to things", value: "nothing" },
+      { label: "Objects: sentimental, keeps everything meaningful", value: "objects" },
+      { label: "Memories: experiences matter more than possessions", value: "memories" },
+      { label: "People: what matters is who they were with", value: "people" },
+      { label: "Nothing really, travels light, doesn't attach to things", value: "nothing" },
     ],
   },
   {
@@ -180,9 +180,9 @@ export const quizQuestions: QuizQuestion[] = [
     deepOnly: true,
     question: (name) => `How does ${name} feel about surprises?`,
     options: [
-      { label: "Loves them — the more unexpected the better", value: "loves" },
-      { label: "Likes them if they're thoughtful — not random for random's sake", value: "thoughtful" },
-      { label: "Prefers knowing what's coming — surprises make them anxious", value: "anxious" },
+      { label: "Loves them, the more unexpected the better", value: "loves" },
+      { label: "Likes them if they're thoughtful, not random for random's sake", value: "thoughtful" },
+      { label: "Prefers knowing what's coming, surprises make them anxious", value: "anxious" },
       { label: "Depends entirely on who it's from", value: "depends" },
     ],
   },

@@ -11,8 +11,8 @@ export function generateFallback(
   const isDeep = mode === "deep";
 
   const portrait = isDeep
-    ? `${name} sounds like someone who values authenticity and meaning in the things around them. Based on what you've shared, they appreciate thoughtfulness over extravagance — the kind of person who notices the small details and remembers the stories behind objects. Right now, they seem to be in a season of reflection, where the right gift could feel like a quiet act of recognition. ${name} is the kind of person who doesn't ask for much, which makes it all the more meaningful when someone takes the time to really see them. This ${occasion.toLowerCase()} feels like a chance to show ${name} you truly understand who they are.`
-    : `${name} sounds like someone who values authenticity and meaning in the things around them. Based on what you've shared, they appreciate thoughtfulness over extravagance — the kind of person who notices the small details and remembers the stories behind objects. This ${occasion.toLowerCase()} feels like a chance to show them you truly see who they are.`;
+    ? `${name} sounds like someone who values authenticity and meaning in the things around them. Based on what you've shared, they appreciate thoughtfulness over extravagance: the kind of person who notices the small details and remembers the stories behind objects. Right now, they seem to be in a season of reflection, where the right gift could feel like a quiet act of recognition. ${name} is the kind of person who doesn't ask for much, which makes it all the more meaningful when someone takes the time to really see them. This ${occasion.toLowerCase()} feels like a chance to show ${name} you truly understand who they are.`
+    : `${name} sounds like someone who values authenticity and meaning in the things around them. Based on what you've shared, they appreciate thoughtfulness over extravagance: the kind of person who notices the small details and remembers the stories behind objects. This ${occasion.toLowerCase()} feels like a chance to show them you truly see who they are.`;
 
   const baseTerritories = [
     {
