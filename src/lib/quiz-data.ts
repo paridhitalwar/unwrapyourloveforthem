@@ -60,10 +60,10 @@ export const quizQuestions: QuizQuestion[] = [
     id: 4,
     question: (name) => `Right now, ${name}'s life feels...`,
     options: [
-      { label: "Like a new chapter — something big just started or changed", value: "new-chapter" },
-      { label: "Busy and full — lots happening, not much breathing room", value: "busy" },
-      { label: "Settled and steady — comfortable with where things are", value: "settled" },
-      { label: "A bit in-between — figuring out what comes next", value: "transitional" },
+      { label: "Like a new chapter: something big just started or changed", value: "new-chapter" },
+      { label: "Busy and full: lots happening, not much breathing room", value: "busy" },
+      { label: "Settled and steady: comfortable with where things are", value: "settled" },
+      { label: "A bit in between, figuring out what comes next", value: "transitional" },
     ],
   },
   {
