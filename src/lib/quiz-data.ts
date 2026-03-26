@@ -103,10 +103,10 @@ export const quizQuestions: QuizQuestion[] = [
     deepOnly: true,
     question: (name) => `${name} would probably never spend money on themselves for...`,
     options: [
-      { label: "Something purely for relaxation — always feels too indulgent", value: "relaxation" },
-      { label: "Something expensive for their hobby — hard to justify", value: "hobby" },
-      { label: "Something decorative or aesthetic — seems unnecessary", value: "decorative" },
-      { label: "An experience — prefers saving for practical things", value: "experience" },
+      { label: "Something purely for relaxation, always feels too indulgent", value: "relaxation" },
+      { label: "Something expensive for their hobby, hard to justify", value: "hobby" },
+      { label: "Something decorative or aesthetic, seems unnecessary", value: "decorative" },
+      { label: "An experience, prefers saving for practical things", value: "experience" },
     ],
   },
   {
