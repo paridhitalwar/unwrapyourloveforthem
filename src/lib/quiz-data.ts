@@ -33,7 +33,7 @@ export const quizQuestions: QuizQuestion[] = [
       { label: "Is out meeting people, probably at a café or event", value: "social" },
       { label: "Is home with one close friend, deep in conversation", value: "intimate" },
       { label: "Is alone doing something creative or absorbing", value: "solitary" },
-      { label: "Is running errands or ticking off their to-do list", value: "practical" },
+      { label: "Is running errands or ticking off their to do list", value: "practical" },
     ],
   },
   {
