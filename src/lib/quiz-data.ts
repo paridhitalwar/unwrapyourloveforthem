@@ -93,9 +93,9 @@ export const quizQuestions: QuizQuestion[] = [
     question: (name) => `How does ${name} most feel appreciated?`,
     options: [
       { label: "When someone remembers something small they mentioned once", value: "memory" },
-      { label: "When someone gives them real uninterrupted time and attention", value: "time" },
+      { label: "When someone gives them real, uninterrupted time and attention", value: "time" },
       { label: "When someone does something practical to make their life easier", value: "acts" },
-      { label: "When someone gives something that shows genuine thinking of them", value: "gifts" },
+      { label: "When someone gives something that shows genuine thought", value: "gifts" },
     ],
   },
   {
