@@ -147,10 +147,10 @@ export const quizQuestions: QuizQuestion[] = [
     deepOnly: true,
     question: (name) => `In a group setting, ${name} is usually...`,
     options: [
-      { label: "The one who brings everyone together — hosts and connects", value: "connector" },
+      { label: "The one who brings everyone together, hosts and connects", value: "connector" },
       { label: "Having one deep conversation in the corner", value: "deep-talker" },
       { label: "Present but quietly slips away when energy runs low", value: "quiet-exit" },
-      { label: "The observer — speaks only when it truly counts", value: "observer" },
+      { label: "The observer, speaks only when it truly counts", value: "observer" },
     ],
   },
   {
