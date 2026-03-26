@@ -158,10 +158,10 @@ export const quizQuestions: QuizQuestion[] = [
     deepOnly: true,
     question: (name) => `Your relationship with ${name} is mostly...`,
     options: [
-      { label: "Deep and emotionally honest — you talk about real things", value: "deep" },
-      { label: "Warm and easy — comfortable, lots of laughs", value: "warm" },
-      { label: "Fun and playful — inside jokes and running gags", value: "playful" },
-      { label: "Caring and respectful — genuine fondness, still growing", value: "caring" },
+      { label: "Deep and emotionally honest, you talk about real things", value: "deep" },
+      { label: "Warm and easy, comfortable, lots of laughs", value: "warm" },
+      { label: "Fun and playful, inside jokes and running gags", value: "playful" },
+      { label: "Caring and respectful, genuine fondness, still growing", value: "caring" },
     ],
   },
   {
