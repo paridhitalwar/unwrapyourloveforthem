@@ -125,10 +125,10 @@ export const quizQuestions: QuizQuestion[] = [
     deepOnly: true,
     question: (name) => `How does ${name} treat themselves?`,
     options: [
-      { label: "Rarely — always putting others or work first", value: "rarely" },
-      { label: "Intentionally — has rituals and routines they protect", value: "intentional" },
-      { label: "Occasionally — only when they feel they've earned it", value: "occasionally" },
-      { label: "Freely — no guilt, enjoys life's small pleasures", value: "freely" },
+      { label: "Rarely, always putting others or work first", value: "rarely" },
+      { label: "Intentionally, has rituals and routines they protect", value: "intentional" },
+      { label: "Occasionally, only when they feel they've earned it", value: "occasionally" },
+      { label: "Freely, no guilt, enjoys life's small pleasures", value: "freely" },
     ],
   },
   {
