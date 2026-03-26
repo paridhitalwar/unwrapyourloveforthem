@@ -1,54 +1,82 @@
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
-import { Heart, MessageCircle, Gift } from "lucide-react";
 
 const steps = [
-  { icon: Heart, title: "Tell us about the person", desc: "Share their name, your relationship, and the occasion", color: "bg-rose-50 text-rose-500" },
-  { icon: MessageCircle, title: "Answer questions about who they are", desc: "Quick, thoughtful prompts to help us understand them", color: "bg-unwrap-purple-soft text-primary" },
-  { icon: Gift, title: "Get a personalised gift direction", desc: "Not a product list — a thinking partner for your gift", color: "bg-amber-50 text-amber-600" },
+  {
+    num: "01",
+    emoji: "⚙️",
+    title: "Tell us about the person",
+    desc: "Share the subtle nuances that make them unique. No generic keywords, just their essence.",
+  },
+  {
+    num: "02",
+    emoji: "❓",
+    title: "Answer 6-15 questions",
+    desc: "Our AI curator asks intentional questions to narrow down the invisible threads of a perfect gift.",
+  },
+  {
+    num: "03",
+    emoji: "✨",
+    title: "Get your gift direction",
+    desc: 'Receive a curated strategy—not just products, but the "why" behind the suggestion.',
+  },
 ];
 
 const About = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      <main className="max-w-lg mx-auto px-6 pt-12 pb-20">
+      <main className="max-w-lg mx-auto px-6 pt-10 pb-20">
+        {/* Hero headline */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
+          className="text-center mb-12"
         >
-          <h1 className="font-display font-bold text-3xl text-primary mb-4">What is Unwrap?</h1>
-          <p className="text-foreground leading-relaxed mb-2 text-base">
-            Unwrap helps you think before you search. It's not a gift shop. It's a thinking partner.
+          <h1 className="font-display font-bold text-[32px] md:text-[40px] text-foreground leading-tight mb-4">
+            Unwrap helps you think before you search.
+          </h1>
+          <p className="text-muted-foreground text-base leading-relaxed max-w-sm mx-auto">
+            Gift-giving is an art form. Most search engines give you lists; we give you clarity.
           </p>
-          <p className="text-muted-foreground text-sm leading-relaxed mb-10">
-            Great gifts don't start with a product catalogue — they start with understanding the person. 
-            Unwrap asks the right questions so you feel confident in your direction before you ever open a shopping tab.
+        </motion.div>
+
+        {/* Steps */}
+        <div className="space-y-8 mb-14">
+          {steps.map((step, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 + idx * 0.15 }}
+              className="flex gap-4 items-start"
+            >
+              <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-unwrap-purple-soft flex items-center justify-center text-lg">
+                {step.emoji}
+              </div>
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-unwrap-purple-vivid mb-1">
+                  Step {step.num}
+                </p>
+                <h3 className="font-bold text-foreground text-[17px] mb-1">{step.title}</h3>
+                <p className="text-[14px] text-muted-foreground leading-relaxed">{step.desc}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Quote */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="bg-card rounded-3xl p-8 text-center border border-border shadow-sm mb-8"
+        >
+          <p className="font-display italic text-xl md:text-2xl text-foreground leading-snug mb-6">
+            "It's not a gift shop. It's a thinking partner."
           </p>
-
-          <h2 className="font-display font-semibold text-xl text-primary mb-6">How it works</h2>
-          <div className="space-y-5 mb-12">
-            {steps.map((step, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 + idx * 0.15 }}
-                className="flex items-start gap-4"
-              >
-                <div className={`w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0 ${step.color}`}>
-                  <step.icon className="w-5 h-5" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-foreground text-[15px]">{step.title}</h3>
-                  <p className="text-[13px] text-muted-foreground mt-0.5">{step.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <p className="text-xs text-muted-foreground text-center">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
             Built as a concept MVP for a product design project
           </p>
         </motion.div>
