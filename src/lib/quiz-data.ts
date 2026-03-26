@@ -180,9 +180,9 @@ export const quizQuestions: QuizQuestion[] = [
     deepOnly: true,
     question: (name) => `How does ${name} feel about surprises?`,
     options: [
-      { label: "Loves them — the more unexpected the better", value: "loves" },
-      { label: "Likes them if they're thoughtful — not random for random's sake", value: "thoughtful" },
-      { label: "Prefers knowing what's coming — surprises make them anxious", value: "anxious" },
+      { label: "Loves them, the more unexpected the better", value: "loves" },
+      { label: "Likes them if they're thoughtful, not random for random's sake", value: "thoughtful" },
+      { label: "Prefers knowing what's coming, surprises make them anxious", value: "anxious" },
       { label: "Depends entirely on who it's from", value: "depends" },
     ],
   },
