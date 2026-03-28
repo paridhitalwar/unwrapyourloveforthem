@@ -108,6 +108,20 @@ const Index = () => {
             />
           </div>
 
+          <div className="space-y-2">
+            <Label className="text-xs font-semibold uppercase tracking-wider text-primary">Their age group</Label>
+            <Select value={age} onValueChange={setAge}>
+              <SelectTrigger className="h-12 bg-card border-[1.5px] border-border rounded-2xl focus:border-unwrap-purple-vivid focus:shadow-purple-glow">
+                <SelectValue placeholder="Select age group" />
+              </SelectTrigger>
+              <SelectContent>
+                {ageGroups.map((a) => (
+                  <SelectItem key={a} value={a}>{a}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
           {/* Mode Selection */}
           <div className="space-y-2">
             <Label className="text-xs font-semibold uppercase tracking-wider text-primary">How deep should we go?</Label>
