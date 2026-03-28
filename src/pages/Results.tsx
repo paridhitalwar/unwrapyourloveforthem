@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, TrendingUp, Scissors, Sparkles, ExternalLink, Lightbulb, Mail } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Confetti from "@/components/Confetti";
 import type { GiftResult, QuizMode } from "@/lib/quiz-data";
@@ -132,7 +132,7 @@ const Results = () => {
                           {/* Trending idea */}
                           {territory.trendingIdea && (
                             <div className="flex items-start gap-2 p-3 rounded-xl bg-amber-50 border border-amber-100">
-                              <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[11px] font-semibold whitespace-nowrap">🔥 Trending</span>
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[11px] font-semibold whitespace-nowrap"><TrendingUp className="w-3 h-3" /> Trending</span>
                               <p className="text-sm font-medium text-foreground">{territory.trendingIdea}</p>
                             </div>
                           )}
@@ -140,7 +140,7 @@ const Results = () => {
                           {/* DIY */}
                           <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-100">
                             <p className="text-sm text-foreground">
-                              <span className="font-semibold">✂️ Make it yourself: </span>
+                              <span className="font-semibold inline-flex items-center gap-1"><Scissors className="w-3.5 h-3.5" /> Make it yourself: </span>
                               {territory.diyOption}
                             </p>
                           </div>
@@ -148,7 +148,7 @@ const Results = () => {
                           {/* Customization */}
                           <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-100">
                             <p className="text-sm text-foreground">
-                              <span className="font-semibold">✨ Personalise it: </span>
+                              <span className="font-semibold inline-flex items-center gap-1"><Sparkles className="w-3.5 h-3.5" /> Personalise it: </span>
                               {territory.customization}
                             </p>
                           </div>
@@ -189,8 +189,8 @@ const Results = () => {
             className="mb-10"
           >
             <div className="rounded-[20px] bg-amber-50 border border-amber-100 p-6 sm:p-7">
-              <h2 className="font-bold text-lg text-amber-800 mb-4">
-                📈 Trending for someone like {name}
+              <h2 className="font-bold text-lg text-amber-800 mb-4 flex items-center gap-2">
+                <TrendingUp className="w-5 h-5" /> Trending for someone like {name}
               </h2>
               <div className="space-y-3">
                 {result.trendingPicks.map((pick, idx) => (
@@ -213,7 +213,7 @@ const Results = () => {
             className="mb-10"
           >
             <div className="p-5 rounded-xl bg-unwrap-purple-soft border border-unwrap-purple-vivid/10">
-              <p className="text-sm text-foreground italic">💡 {result.surpriseNote}</p>
+              <p className="text-sm text-foreground italic flex items-start gap-2"><Lightbulb className="w-4 h-4 flex-shrink-0 mt-0.5 text-unwrap-purple-vivid" /> {result.surpriseNote}</p>
             </div>
           </motion.section>
         )}
@@ -226,8 +226,8 @@ const Results = () => {
           className="mb-12"
         >
           <div className="rounded-[20px] bg-unwrap-purple-soft/50 p-6 sm:p-7">
-            <h2 className="font-display font-bold text-xl text-primary mb-5">
-              💌 What to write in the card
+            <h2 className="font-display font-bold text-xl text-primary mb-5 flex items-center gap-2">
+              <Mail className="w-5 h-5" /> What to write in the card
             </h2>
             <div className="space-y-3">
               {cardNoteEntries.map((note, idx) => (

@@ -118,13 +118,11 @@ export function generateFallback(
     cardNotes,
   };
 
-  if (isDeep) {
-    result.trendingPicks = [
-      { item: "Custom star map or coordinates print", reason: "Because they value meaning in objects" },
-      { item: "Masterclass or Skillshare subscription", reason: "Because they love diving deep into new interests" },
-      { item: "Artisan candle or fragrance set", reason: "Because they appreciate the finer details" },
-    ];
-  }
+  result.trendingPicks = [
+    { item: "Custom star map or coordinates print", reason: "they value meaning in objects" },
+    { item: "Masterclass or Skillshare subscription", reason: "they love diving deep into new interests" },
+    { item: "Artisan candle or fragrance set", reason: "they appreciate the finer details" },
+  ];
 
   return result;
 }

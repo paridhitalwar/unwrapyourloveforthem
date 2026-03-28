@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, MessageCircle, Brain, Gift, ShoppingCart, MessageSquare, CreditCard, Search } from "lucide-react";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -28,8 +28,8 @@ const Landing = () => {
         }`}
       >
         <div className="max-w-6xl mx-auto px-5 md:px-8 h-16 flex items-center justify-between">
-          <span className="font-display font-bold text-primary text-2xl tracking-tight">
-            🎁 Unwrap
+          <span className="font-display font-bold text-primary text-2xl tracking-tight flex items-center gap-1.5">
+            <Gift className="w-6 h-6" /> Unwrap
           </span>
           <div className="hidden md:flex items-center gap-8">
             <button onClick={() => scrollTo("how-it-works")} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
@@ -92,8 +92,8 @@ const Landing = () => {
           transition={{ duration: 0.7 }}
           className="text-center relative z-10 max-w-2xl"
         >
-          <span className="inline-block text-[13px] font-semibold px-4 py-1.5 rounded-full bg-amber-50 text-amber-800 mb-6">
-            ✨ AI-powered gifting companion
+          <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold px-4 py-1.5 rounded-full bg-amber-50 text-amber-800 mb-6">
+            <Gift className="w-3.5 h-3.5" /> AI-powered gifting companion
           </span>
 
           <h1 className="font-display font-bold text-[64px] md:text-[96px] leading-[0.95] tracking-[-0.02em] mb-3 bg-gradient-to-br from-primary to-unwrap-purple-vivid bg-clip-text text-transparent">
@@ -174,9 +174,9 @@ const Landing = () => {
 
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { num: "01", numColor: "text-unwrap-purple-vivid", emoji: "💭", title: "Tell me about them", body: "Share who you're gifting, their name, your relationship, the occasion. That's all we need to start." },
-              { num: "02", numColor: "text-unwrap-amber", emoji: "🧠", title: "Answer 6–15 questions", body: "We ask about their personality, life season, aesthetic, and what makes them tick. Not the occasion, the person." },
-              { num: "03", numColor: "text-unwrap-coral", emoji: "🎁", title: "Get your gift direction", body: "Receive a personalised gift direction, not a product list. We tell you what kind of gift fits and why." },
+              { num: "01", numColor: "text-unwrap-purple-vivid", icon: <MessageCircle className="w-12 h-12 text-unwrap-purple-vivid" />, title: "Tell me about them", body: "Share who you're gifting, their name, your relationship, the occasion. That's all we need to start." },
+              { num: "02", numColor: "text-unwrap-amber", icon: <Brain className="w-12 h-12 text-unwrap-amber" />, title: "Answer 6–15 questions", body: "We ask about their personality, life season, aesthetic, and what makes them tick. Not the occasion, the person." },
+              { num: "03", numColor: "text-unwrap-coral", icon: <Gift className="w-12 h-12 text-unwrap-coral" />, title: "Get your gift direction", body: "Receive a personalised gift direction, not a product list. We tell you what kind of gift fits and why." },
             ].map((card, idx) => (
               <motion.div
                 key={idx}
@@ -187,7 +187,7 @@ const Landing = () => {
                 className="bg-card border border-border rounded-3xl p-8 md:p-10 text-center hover:-translate-y-1 hover:shadow-card-hover transition-all duration-300"
               >
                 <span className={`font-display font-bold text-5xl ${card.numColor} opacity-30`}>{card.num}</span>
-                <p className="text-5xl my-4">{card.emoji}</p>
+                <div className="my-4">{card.icon}</div>
                 <h3 className="font-display font-bold text-xl text-foreground mb-2">{card.title}</h3>
                 <p className="text-[15px] text-muted-foreground leading-relaxed">{card.body}</p>
               </motion.div>
@@ -206,10 +206,10 @@ const Landing = () => {
           <div className="grid md:grid-cols-2 gap-8 items-start">
             <div className="space-y-3">
               {[
-                "😰 You spend 3 hours on Amazon and still aren't sure",
-                "😬 You text a mutual friend 'does she already have this?'",
-                "😶 You buy a gift card. Again. And feel a bit bad about it.",
-                "😩 You search 'gifts for someone who likes cooking' and get 47 generic listicles",
+                { icon: <ShoppingCart className="w-5 h-5 text-unwrap-coral flex-shrink-0 mt-0.5" />, text: "You spend 3 hours on Amazon and still aren't sure" },
+                { icon: <MessageSquare className="w-5 h-5 text-unwrap-coral flex-shrink-0 mt-0.5" />, text: "You text a mutual friend 'does she already have this?'" },
+                { icon: <CreditCard className="w-5 h-5 text-unwrap-coral flex-shrink-0 mt-0.5" />, text: "You buy a gift card. Again. And feel a bit bad about it." },
+                { icon: <Search className="w-5 h-5 text-unwrap-coral flex-shrink-0 mt-0.5" />, text: "You search 'gifts for someone who likes cooking' and get 47 generic listicles" },
               ].map((pain, i) => (
                 <motion.div
                   key={i}
@@ -217,9 +217,10 @@ const Landing = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="bg-card rounded-2xl p-5 border-l-4 border-unwrap-coral text-foreground text-[15px] font-medium shadow-sm"
+                  className="bg-card rounded-2xl p-5 border-l-4 border-unwrap-coral text-foreground text-[15px] font-medium shadow-sm flex items-start gap-3"
                 >
-                  {pain}
+                  {pain.icon}
+                  <span>{pain.text}</span>
                 </motion.div>
               ))}
             </div>
@@ -257,12 +258,12 @@ const Landing = () => {
       <footer className="bg-foreground py-10 px-5 md:px-8">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
           <div>
-            <span className="font-display font-bold text-white text-xl">🎁 Unwrap</span>
+            <span className="font-display font-bold text-white text-xl flex items-center gap-1.5"><Gift className="w-5 h-5" /> Unwrap</span>
             <p className="text-white/50 text-sm mt-1">Because every great gift starts with understanding</p>
           </div>
-          <p className="text-white/40 text-xs">Built as a concept MVP · NextLeap PM Fellowship 2026</p>
+          <p className="text-white/40 text-xs">No sign up. No marketplace. Just better gifting decisions.</p>
         </div>
-        <p className="text-white/30 text-xs text-center mt-6">No sign up. No marketplace. Just better gifting decisions.</p>
+        
       </footer>
     </div>
   );
