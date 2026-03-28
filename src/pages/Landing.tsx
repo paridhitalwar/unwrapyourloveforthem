@@ -28,8 +28,8 @@ const Landing = () => {
         }`}
       >
         <div className="max-w-6xl mx-auto px-5 md:px-8 h-16 flex items-center justify-between">
-          <span className="font-display font-bold text-primary text-2xl tracking-tight">
-            🎁 Unwrap
+          <span className="font-display font-bold text-primary text-2xl tracking-tight flex items-center gap-1.5">
+            <Gift className="w-6 h-6" /> Unwrap
           </span>
           <div className="hidden md:flex items-center gap-8">
             <button onClick={() => scrollTo("how-it-works")} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
