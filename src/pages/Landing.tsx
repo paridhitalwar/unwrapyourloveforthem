@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, MessageCircle, Brain, Gift, ShoppingCart, MessageSquare, CreditCard, Search } from "lucide-react";
 
 const Landing = () => {
   const navigate = useNavigate();
