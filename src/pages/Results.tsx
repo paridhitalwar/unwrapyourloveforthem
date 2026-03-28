@@ -132,7 +132,7 @@ const Results = () => {
                           {/* Trending idea */}
                           {territory.trendingIdea && (
                             <div className="flex items-start gap-2 p-3 rounded-xl bg-amber-50 border border-amber-100">
-                              <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[11px] font-semibold whitespace-nowrap">🔥 Trending</span>
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[11px] font-semibold whitespace-nowrap"><TrendingUp className="w-3 h-3" /> Trending</span>
                               <p className="text-sm font-medium text-foreground">{territory.trendingIdea}</p>
                             </div>
                           )}
