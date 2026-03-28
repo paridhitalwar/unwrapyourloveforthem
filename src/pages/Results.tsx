@@ -213,7 +213,7 @@ const Results = () => {
             className="mb-10"
           >
             <div className="p-5 rounded-xl bg-unwrap-purple-soft border border-unwrap-purple-vivid/10">
-              <p className="text-sm text-foreground italic">💡 {result.surpriseNote}</p>
+              <p className="text-sm text-foreground italic flex items-start gap-2"><Lightbulb className="w-4 h-4 flex-shrink-0 mt-0.5 text-unwrap-purple-vivid" /> {result.surpriseNote}</p>
             </div>
           </motion.section>
         )}
