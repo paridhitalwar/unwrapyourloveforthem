@@ -258,7 +258,7 @@ const Landing = () => {
       <footer className="bg-foreground py-10 px-5 md:px-8">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
           <div>
-            <span className="font-display font-bold text-white text-xl">🎁 Unwrap</span>
+            <span className="font-display font-bold text-white text-xl flex items-center gap-1.5"><Gift className="w-5 h-5" /> Unwrap</span>
             <p className="text-white/50 text-sm mt-1">Because every great gift starts with understanding</p>
           </div>
           <p className="text-white/40 text-xs">No sign up. No marketplace. Just better gifting decisions.</p>

@@ -226,8 +226,8 @@ const Results = () => {
           className="mb-12"
         >
           <div className="rounded-[20px] bg-unwrap-purple-soft/50 p-6 sm:p-7">
-            <h2 className="font-display font-bold text-xl text-primary mb-5">
-              💌 What to write in the card
+            <h2 className="font-display font-bold text-xl text-primary mb-5 flex items-center gap-2">
+              <Mail className="w-5 h-5" /> What to write in the card
             </h2>
             <div className="space-y-3">
               {cardNoteEntries.map((note, idx) => (
