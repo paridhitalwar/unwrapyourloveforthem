@@ -206,10 +206,10 @@ const Landing = () => {
           <div className="grid md:grid-cols-2 gap-8 items-start">
             <div className="space-y-3">
               {[
-                "😰 You spend 3 hours on Amazon and still aren't sure",
-                "😬 You text a mutual friend 'does she already have this?'",
-                "😶 You buy a gift card. Again. And feel a bit bad about it.",
-                "😩 You search 'gifts for someone who likes cooking' and get 47 generic listicles",
+                { icon: <ShoppingCart className="w-5 h-5 text-unwrap-coral flex-shrink-0 mt-0.5" />, text: "You spend 3 hours on Amazon and still aren't sure" },
+                { icon: <MessageSquare className="w-5 h-5 text-unwrap-coral flex-shrink-0 mt-0.5" />, text: "You text a mutual friend 'does she already have this?'" },
+                { icon: <CreditCard className="w-5 h-5 text-unwrap-coral flex-shrink-0 mt-0.5" />, text: "You buy a gift card. Again. And feel a bit bad about it." },
+                { icon: <Search className="w-5 h-5 text-unwrap-coral flex-shrink-0 mt-0.5" />, text: "You search 'gifts for someone who likes cooking' and get 47 generic listicles" },
               ].map((pain, i) => (
                 <motion.div
                   key={i}
