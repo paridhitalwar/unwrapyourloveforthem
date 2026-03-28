@@ -148,7 +148,7 @@ const Results = () => {
                           {/* Customization */}
                           <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-100">
                             <p className="text-sm text-foreground">
-                              <span className="font-semibold">✨ Personalise it: </span>
+                              <span className="font-semibold inline-flex items-center gap-1"><Sparkles className="w-3.5 h-3.5" /> Personalise it: </span>
                               {territory.customization}
                             </p>
                           </div>
