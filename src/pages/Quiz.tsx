@@ -109,6 +109,7 @@ const Quiz = () => {
   const relationship = searchParams.get("relationship") || "";
   const occasion = searchParams.get("occasion") || "";
   const budget = searchParams.get("budget") || "";
+  const age = searchParams.get("age") || "";
   const mode = (searchParams.get("mode") || "quick") as QuizMode;
 
   const activeQuestions = getQuestionsForMode(mode);
