@@ -262,7 +262,7 @@ const Landing = () => {
           </div>
           <p className="text-white/40 text-xs">No sign up. No marketplace. Just better gifting decisions.</p>
         </div>
-        <p className="text-white/30 text-xs text-center mt-6">No sign up. No marketplace. Just better gifting decisions.</p>
+        
       </footer>
     </div>
   );
