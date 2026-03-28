@@ -3,8 +3,18 @@ export const relationships = [
   "Partner",
   "Parent",
   "Sibling",
+  "Relative",
   "Colleague",
   "Other",
+];
+
+export const ageGroups = [
+  "Under 18",
+  "18 to 25",
+  "26 to 35",
+  "36 to 50",
+  "51 to 65",
+  "Above 65",
 ];
 
 export const occasions = [

@@ -5,7 +5,7 @@ import Navigation from "@/components/Navigation";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { relationships, occasions, type QuizMode } from "@/lib/quiz-data";
+import { relationships, occasions, ageGroups, type QuizMode } from "@/lib/quiz-data";
 
 const Index = () => {
   const navigate = useNavigate();
