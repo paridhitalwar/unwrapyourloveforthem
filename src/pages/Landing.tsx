@@ -92,8 +92,8 @@ const Landing = () => {
           transition={{ duration: 0.7 }}
           className="text-center relative z-10 max-w-2xl"
         >
-          <span className="inline-block text-[13px] font-semibold px-4 py-1.5 rounded-full bg-amber-50 text-amber-800 mb-6">
-            ✨ AI-powered gifting companion
+          <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold px-4 py-1.5 rounded-full bg-amber-50 text-amber-800 mb-6">
+            <Gift className="w-3.5 h-3.5" /> AI-powered gifting companion
           </span>
 
           <h1 className="font-display font-bold text-[64px] md:text-[96px] leading-[0.95] tracking-[-0.02em] mb-3 bg-gradient-to-br from-primary to-unwrap-purple-vivid bg-clip-text text-transparent">
