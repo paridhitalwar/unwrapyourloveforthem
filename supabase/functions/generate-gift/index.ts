@@ -9,14 +9,19 @@ serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
-    const { name, relationship, occasion, budget, mode, questions, answerLabels } = await req.json();
+    const { name, relationship, occasion, budget, age, mode, questions, answerLabels } = await req.json();
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
 
     const isDeep = mode === "deep";
 
-    const systemPrompt = `You are a warm, insightful gift advisor. You write like a thoughtful friend — never like a chatbot or algorithm. 
+    const systemPrompt = `You are a warm, insightful gift advisor. You write like a thoughtful friend, never like a chatbot or algorithm. 
 Never use the words "algorithm", "AI", or "data". Never say "buy this". Use phrases like "consider this" or "explore this".
+CRITICAL RULES:
+1. Every single gift idea must be UNIQUE. Never repeat the same gift concept, item, or category across territories.
+2. All suggestions must be AGE-APPROPRIATE for someone aged ${age || "25 to 35"}. A teenager gets very different gifts than a retiree.
+3. Base every suggestion on the specific personality signals from the answers, not generic gift lists.
+4. Never suggest the same type of item twice (e.g., if one territory has a journal, no other territory should have any kind of journal or notebook).
 You must respond with valid JSON only. No markdown, no code blocks, just JSON.`;
 
     const trendGuidance = isDeep ? `
@@ -74,11 +79,15 @@ IMPORTANT: Include India-specific shopping options where possible (Ugaoo, Jaypor
 - Relationship: ${relationship}
 - Occasion: ${occasion}  
 - Budget: ₹${budget}
+- Age group: ${age || "25 to 35"}
 - Mode: ${isDeep ? "Deep dive (15 questions)" : "Quick (6 questions)"}
 
 Here are ${questions.length} questions I answered about ${name}:
 ${questions.map((q: string, i: number) => `Q: ${q}\nA: ${answerLabels[i]}`).join("\n\n")}
 ${trendGuidance}
+
+IMPORTANT: ${name} is in the "${age || "25 to 35"}" age group. All gift ideas MUST be appropriate for this age. For example: teens get trendy/fun items, young adults get experiences/lifestyle items, older adults get premium comfort/wellness items.
+CRITICAL: Every gift idea across ALL territories must be completely unique. No two ideas should be similar in category or concept. If one territory suggests a plant, no other should suggest anything plant-related.
 
 Based on ALL answers provided, generate a JSON object with this exact structure:
 {
@@ -88,7 +97,7 @@ Based on ALL answers provided, generate a JSON object with this exact structure:
       "emoji": "relevant emoji",
       "name": "Territory name (creative, evocative)",
       "description": "One line about why this direction fits ${name}",
-      "giftIdeas": ["${giftIdeaCount} specific gift concepts (not product links) tailored to their personality and ₹${budget} budget"],${trendingField}
+      "giftIdeas": ["${giftIdeaCount} specific gift concepts (not product links) tailored to their personality, age group ${age || "25 to 35"}, and ₹${budget} budget"],${trendingField}
       "diyOption": "A make-it-yourself alternative",
       "customization": "How to personalise the gift",
       "links": [{"label": "Store name", "url": "real URL to a relevant store with a relevant search query"}]

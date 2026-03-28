@@ -5,7 +5,7 @@ import Navigation from "@/components/Navigation";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { relationships, occasions, type QuizMode } from "@/lib/quiz-data";
+import { relationships, occasions, ageGroups, type QuizMode } from "@/lib/quiz-data";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -13,13 +13,14 @@ const Index = () => {
   const [relationship, setRelationship] = useState("");
   const [occasion, setOccasion] = useState("");
   const [budget, setBudget] = useState("");
+  const [age, setAge] = useState("");
   const [mode, setMode] = useState<QuizMode>("quick");
 
-  const canProceed = name.trim() && relationship && occasion && budget;
+  const canProceed = name.trim() && relationship && occasion && budget && age;
 
   const handleSubmit = () => {
     if (!canProceed) return;
-    const params = new URLSearchParams({ name: name.trim(), relationship, occasion, budget, mode });
+    const params = new URLSearchParams({ name: name.trim(), relationship, occasion, budget, age, mode });
     navigate(`/quiz?${params.toString()}`);
   };
 
@@ -105,6 +106,20 @@ const Index = () => {
               onChange={(e) => setBudget(e.target.value)}
               className="h-12 bg-card border-[1.5px] border-border rounded-2xl focus:border-unwrap-purple-vivid focus:shadow-purple-glow focus:ring-0 transition-all duration-200"
             />
+          </div>
+
+          <div className="space-y-2">
+            <Label className="text-xs font-semibold uppercase tracking-wider text-primary">Their age group</Label>
+            <Select value={age} onValueChange={setAge}>
+              <SelectTrigger className="h-12 bg-card border-[1.5px] border-border rounded-2xl focus:border-unwrap-purple-vivid focus:shadow-purple-glow">
+                <SelectValue placeholder="Select age group" />
+              </SelectTrigger>
+              <SelectContent>
+                {ageGroups.map((a) => (
+                  <SelectItem key={a} value={a}>{a}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
           {/* Mode Selection */}
