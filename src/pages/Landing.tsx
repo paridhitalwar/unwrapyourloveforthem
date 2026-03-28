@@ -217,9 +217,10 @@ const Landing = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="bg-card rounded-2xl p-5 border-l-4 border-unwrap-coral text-foreground text-[15px] font-medium shadow-sm"
+                  className="bg-card rounded-2xl p-5 border-l-4 border-unwrap-coral text-foreground text-[15px] font-medium shadow-sm flex items-start gap-3"
                 >
-                  {pain}
+                  {pain.icon}
+                  <span>{pain.text}</span>
                 </motion.div>
               ))}
             </div>
