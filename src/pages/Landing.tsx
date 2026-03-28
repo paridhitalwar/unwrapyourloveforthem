@@ -187,7 +187,7 @@ const Landing = () => {
                 className="bg-card border border-border rounded-3xl p-8 md:p-10 text-center hover:-translate-y-1 hover:shadow-card-hover transition-all duration-300"
               >
                 <span className={`font-display font-bold text-5xl ${card.numColor} opacity-30`}>{card.num}</span>
-                <p className="text-5xl my-4">{card.emoji}</p>
+                <div className="my-4">{card.icon}</div>
                 <h3 className="font-display font-bold text-xl text-foreground mb-2">{card.title}</h3>
                 <p className="text-[15px] text-muted-foreground leading-relaxed">{card.body}</p>
               </motion.div>
