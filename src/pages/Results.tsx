@@ -140,7 +140,7 @@ const Results = () => {
                           {/* DIY */}
                           <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-100">
                             <p className="text-sm text-foreground">
-                              <span className="font-semibold">✂️ Make it yourself: </span>
+                              <span className="font-semibold inline-flex items-center gap-1"><Scissors className="w-3.5 h-3.5" /> Make it yourself: </span>
                               {territory.diyOption}
                             </p>
                           </div>
