@@ -79,6 +79,7 @@ IMPORTANT: Include India-specific shopping options where possible (Ugaoo, Jaypor
 - Relationship: ${relationship}
 - Occasion: ${occasion}  
 - Budget: ₹${budget}
+- Age group: ${age || "25 to 35"}
 - Mode: ${isDeep ? "Deep dive (15 questions)" : "Quick (6 questions)"}
 
 Here are ${questions.length} questions I answered about ${name}:
