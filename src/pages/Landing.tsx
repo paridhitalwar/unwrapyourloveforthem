@@ -260,7 +260,7 @@ const Landing = () => {
             <span className="font-display font-bold text-white text-xl">🎁 Unwrap</span>
             <p className="text-white/50 text-sm mt-1">Because every great gift starts with understanding</p>
           </div>
-          <p className="text-white/40 text-xs">Built as a concept MVP · NextLeap PM Fellowship 2026</p>
+          <p className="text-white/40 text-xs">No sign up. No marketplace. Just better gifting decisions.</p>
         </div>
         <p className="text-white/30 text-xs text-center mt-6">No sign up. No marketplace. Just better gifting decisions.</p>
       </footer>
