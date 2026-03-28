@@ -16,11 +16,11 @@ const Index = () => {
   const [age, setAge] = useState("");
   const [mode, setMode] = useState<QuizMode>("quick");
 
-  const canProceed = name.trim() && relationship && occasion && budget;
+  const canProceed = name.trim() && relationship && occasion && budget && age;
 
   const handleSubmit = () => {
     if (!canProceed) return;
-    const params = new URLSearchParams({ name: name.trim(), relationship, occasion, budget, mode });
+    const params = new URLSearchParams({ name: name.trim(), relationship, occasion, budget, age, mode });
     navigate(`/quiz?${params.toString()}`);
   };
 
