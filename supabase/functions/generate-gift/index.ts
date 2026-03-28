@@ -86,6 +86,9 @@ Here are ${questions.length} questions I answered about ${name}:
 ${questions.map((q: string, i: number) => `Q: ${q}\nA: ${answerLabels[i]}`).join("\n\n")}
 ${trendGuidance}
 
+IMPORTANT: ${name} is in the "${age || "25 to 35"}" age group. All gift ideas MUST be appropriate for this age. For example: teens get trendy/fun items, young adults get experiences/lifestyle items, older adults get premium comfort/wellness items.
+CRITICAL: Every gift idea across ALL territories must be completely unique. No two ideas should be similar in category or concept. If one territory suggests a plant, no other should suggest anything plant-related.
+
 Based on ALL answers provided, generate a JSON object with this exact structure:
 {
   ${portraitInstructions},
@@ -94,7 +97,7 @@ Based on ALL answers provided, generate a JSON object with this exact structure:
       "emoji": "relevant emoji",
       "name": "Territory name (creative, evocative)",
       "description": "One line about why this direction fits ${name}",
-      "giftIdeas": ["${giftIdeaCount} specific gift concepts (not product links) tailored to their personality and ₹${budget} budget"],${trendingField}
+      "giftIdeas": ["${giftIdeaCount} specific gift concepts (not product links) tailored to their personality, age group ${age || "25 to 35"}, and ₹${budget} budget"],${trendingField}
       "diyOption": "A make-it-yourself alternative",
       "customization": "How to personalise the gift",
       "links": [{"label": "Store name", "url": "real URL to a relevant store with a relevant search query"}]
