@@ -13,6 +13,7 @@ const Index = () => {
   const [relationship, setRelationship] = useState("");
   const [occasion, setOccasion] = useState("");
   const [budget, setBudget] = useState("");
+  const [age, setAge] = useState("");
   const [mode, setMode] = useState<QuizMode>("quick");
 
   const canProceed = name.trim() && relationship && occasion && budget;
