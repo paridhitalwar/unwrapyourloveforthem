@@ -174,9 +174,9 @@ const Landing = () => {
 
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { num: "01", numColor: "text-unwrap-purple-vivid", emoji: "💭", title: "Tell me about them", body: "Share who you're gifting, their name, your relationship, the occasion. That's all we need to start." },
-              { num: "02", numColor: "text-unwrap-amber", emoji: "🧠", title: "Answer 6–15 questions", body: "We ask about their personality, life season, aesthetic, and what makes them tick. Not the occasion, the person." },
-              { num: "03", numColor: "text-unwrap-coral", emoji: "🎁", title: "Get your gift direction", body: "Receive a personalised gift direction, not a product list. We tell you what kind of gift fits and why." },
+              { num: "01", numColor: "text-unwrap-purple-vivid", icon: <MessageCircle className="w-12 h-12 text-unwrap-purple-vivid" />, title: "Tell me about them", body: "Share who you're gifting, their name, your relationship, the occasion. That's all we need to start." },
+              { num: "02", numColor: "text-unwrap-amber", icon: <Brain className="w-12 h-12 text-unwrap-amber" />, title: "Answer 6–15 questions", body: "We ask about their personality, life season, aesthetic, and what makes them tick. Not the occasion, the person." },
+              { num: "03", numColor: "text-unwrap-coral", icon: <Gift className="w-12 h-12 text-unwrap-coral" />, title: "Get your gift direction", body: "Receive a personalised gift direction, not a product list. We tell you what kind of gift fits and why." },
             ].map((card, idx) => (
               <motion.div
                 key={idx}
