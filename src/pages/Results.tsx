@@ -189,8 +189,8 @@ const Results = () => {
             className="mb-10"
           >
             <div className="rounded-[20px] bg-amber-50 border border-amber-100 p-6 sm:p-7">
-              <h2 className="font-bold text-lg text-amber-800 mb-4">
-                📈 Trending for someone like {name}
+              <h2 className="font-bold text-lg text-amber-800 mb-4 flex items-center gap-2">
+                <TrendingUp className="w-5 h-5" /> Trending for someone like {name}
               </h2>
               <div className="space-y-3">
                 {result.trendingPicks.map((pick, idx) => (
