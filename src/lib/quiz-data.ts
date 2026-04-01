@@ -226,7 +226,7 @@ export interface GiftTerritory {
   name: string;
   description: string;
   giftIdeas: string[];
-  trendingIdea?: string;
+  
   diyOption: string;
   customization: string;
   links: { label: string; url: string }[];
