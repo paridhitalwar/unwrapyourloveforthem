@@ -22,6 +22,7 @@ CRITICAL RULES:
 2. All suggestions must be AGE-APPROPRIATE for someone aged ${age || "25 to 35"}. A teenager gets very different gifts than a retiree.
 3. Base every suggestion on the specific personality signals from the answers, not generic gift lists.
 4. Never suggest the same type of item twice (e.g., if one territory has a journal, no other territory should have any kind of journal or notebook).
+5. Every territory description MUST weave in the relationship type (${relationship}), the occasion (${occasion}), and the relationship dynamic from the answers. The reasoning should feel like advice from someone who understands BOTH the person AND the gifter's relationship with them. Example: "For a close friend navigating a big life change like moving cities, something that grounds her new daily routine feels more meaningful than something celebratory."
 You must respond with valid JSON only. No markdown, no code blocks, just JSON.`;
 
     const trendGuidance = isDeep ? `
