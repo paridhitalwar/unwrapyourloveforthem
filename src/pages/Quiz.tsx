@@ -159,6 +159,7 @@ const Quiz = () => {
             occasion,
             budget,
             age,
+            pronoun,
             mode,
             answers: newAnswers,
             questions: activeQuestions.map((q) => q.question(name)),
