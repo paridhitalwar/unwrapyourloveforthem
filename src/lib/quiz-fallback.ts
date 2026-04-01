@@ -65,7 +65,7 @@ export function generateFallback(
         "A curated experience box tailored to their interests",
         ...(isDeep ? ["A Masterclass subscription in a topic they're curious about"] : []),
       ],
-      trendingIdea: isDeep ? "Trending right now: Custom digital portrait in a style they love" : undefined,
+      trendingIdea: undefined,
       diyOption: "Plan a surprise day built around 3-4 of their favourite small pleasures",
       customization: "Add a personal itinerary card for the experience with inside jokes",
       links: [
