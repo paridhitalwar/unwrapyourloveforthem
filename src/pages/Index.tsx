@@ -5,7 +5,7 @@ import Navigation from "@/components/Navigation";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { relationships, occasions, ageGroups, type QuizMode } from "@/lib/quiz-data";
+import { relationships, occasions, ageGroups, type QuizMode, type Pronoun } from "@/lib/quiz-data";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -14,6 +14,7 @@ const Index = () => {
   const [occasion, setOccasion] = useState("");
   const [budget, setBudget] = useState("");
   const [age, setAge] = useState("");
+  const [pronoun, setPronoun] = useState<Pronoun | "">("");
   const [mode, setMode] = useState<QuizMode>("quick");
 
   const canProceed = name.trim() && relationship && occasion && budget && age;
@@ -21,6 +22,7 @@ const Index = () => {
   const handleSubmit = () => {
     if (!canProceed) return;
     const params = new URLSearchParams({ name: name.trim(), relationship, occasion, budget, age, mode });
+    if (pronoun) params.set("pronoun", pronoun);
     navigate(`/quiz?${params.toString()}`);
   };
 
@@ -66,6 +68,26 @@ const Index = () => {
               onChange={(e) => setName(e.target.value)}
               className="h-12 bg-card border-[1.5px] border-border rounded-2xl focus:border-unwrap-purple-vivid focus:shadow-purple-glow focus:ring-0 transition-all duration-200"
             />
+          </div>
+
+          <div className="space-y-2">
+            <Label className="text-xs font-semibold uppercase tracking-wider text-primary">About them <span className="text-muted-foreground font-normal normal-case">(optional)</span></Label>
+            <div className="grid grid-cols-3 gap-2">
+              {([["she", "She/Her"], ["he", "He/Him"], ["they", "They/Them"]] as const).map(([val, label]) => (
+                <button
+                  key={val}
+                  type="button"
+                  onClick={() => setPronoun(pronoun === val ? "" : val)}
+                  className={`h-11 rounded-2xl border-[1.5px] text-sm font-medium transition-all duration-200 ${
+                    pronoun === val
+                      ? "border-transparent gradient-purple text-white shadow-card"
+                      : "border-border bg-card text-foreground hover:border-primary/40"
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="space-y-2">

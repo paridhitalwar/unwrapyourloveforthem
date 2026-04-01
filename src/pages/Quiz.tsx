@@ -111,6 +111,7 @@ const Quiz = () => {
   const occasion = searchParams.get("occasion") || "";
   const budget = searchParams.get("budget") || "";
   const age = searchParams.get("age") || "";
+  const pronoun = searchParams.get("pronoun") || "";
   const mode = (searchParams.get("mode") || "quick") as QuizMode;
 
   const activeQuestions = getQuestionsForMode(mode);
@@ -158,6 +159,7 @@ const Quiz = () => {
             occasion,
             budget,
             age,
+            pronoun,
             mode,
             answers: newAnswers,
             questions: activeQuestions.map((q) => q.question(name)),
@@ -187,7 +189,7 @@ const Quiz = () => {
         navigate("/results");
       }
     }
-  }, [currentQ, answers, name, relationship, occasion, budget, age, mode, navigate, activeQuestions, totalQuestions]);
+  }, [currentQ, answers, name, relationship, occasion, budget, age, pronoun, mode, navigate, activeQuestions, totalQuestions]);
 
   if (isLoading) {
     return <LoadingScreen mode={mode} loadingText={loadingText} />;
