@@ -5,7 +5,7 @@ import Navigation from "@/components/Navigation";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { relationships, occasions, ageGroups, type QuizMode } from "@/lib/quiz-data";
+import { relationships, occasions, ageGroups, type QuizMode, type Pronoun } from "@/lib/quiz-data";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -14,6 +14,7 @@ const Index = () => {
   const [occasion, setOccasion] = useState("");
   const [budget, setBudget] = useState("");
   const [age, setAge] = useState("");
+  const [pronoun, setPronoun] = useState<Pronoun | "">("");
   const [mode, setMode] = useState<QuizMode>("quick");
 
   const canProceed = name.trim() && relationship && occasion && budget && age;
@@ -21,6 +22,7 @@ const Index = () => {
   const handleSubmit = () => {
     if (!canProceed) return;
     const params = new URLSearchParams({ name: name.trim(), relationship, occasion, budget, age, mode });
+    if (pronoun) params.set("pronoun", pronoun);
     navigate(`/quiz?${params.toString()}`);
   };
 
