@@ -71,6 +71,26 @@ const Index = () => {
           </div>
 
           <div className="space-y-2">
+            <Label className="text-xs font-semibold uppercase tracking-wider text-primary">About them <span className="text-muted-foreground font-normal normal-case">(optional)</span></Label>
+            <div className="grid grid-cols-3 gap-2">
+              {([["she", "She/Her"], ["he", "He/Him"], ["they", "They/Them"]] as const).map(([val, label]) => (
+                <button
+                  key={val}
+                  type="button"
+                  onClick={() => setPronoun(pronoun === val ? "" : val)}
+                  className={`h-11 rounded-2xl border-[1.5px] text-sm font-medium transition-all duration-200 ${
+                    pronoun === val
+                      ? "border-transparent gradient-purple text-white shadow-card"
+                      : "border-border bg-card text-foreground hover:border-primary/40"
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-2">
             <Label className="text-xs font-semibold uppercase tracking-wider text-primary">Your relationship</Label>
             <Select value={relationship} onValueChange={setRelationship}>
               <SelectTrigger className="h-12 bg-card border-[1.5px] border-border rounded-2xl focus:border-unwrap-purple-vivid focus:shadow-purple-glow">

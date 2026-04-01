@@ -27,6 +27,7 @@ export const occasions = [
 ];
 
 export type QuizMode = "quick" | "deep";
+export type Pronoun = "she" | "he" | "they";
 
 export interface QuizQuestion {
   id: number;
