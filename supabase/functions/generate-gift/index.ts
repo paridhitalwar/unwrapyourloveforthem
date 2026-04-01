@@ -47,9 +47,7 @@ IMPORTANT: Include India-specific shopping options where possible (Ugaoo, Jaypor
     const giftIdeaCount = isDeep ? 4 : 3;
     const linkCount = isDeep ? 4 : 3;
 
-    const trendingField = isDeep
-      ? `\n      "trendingIdea": "One trending gift idea explicitly labeled as 'Trending right now: [item]' with reason why it fits ${name}",`
-      : "";
+    const trendingField = "";
 
     const cardNotesStructure = isDeep
       ? `"cardNotes": {
