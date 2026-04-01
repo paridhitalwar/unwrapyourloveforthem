@@ -45,7 +45,7 @@ export function generateFallback(
         "A curated playlist turned into a custom vinyl or cassette",
         ...(isDeep ? ["A wellness hamper with aromatherapy and journaling supplies"] : []),
       ],
-      trendingIdea: isDeep ? "Trending right now: Personalised Spotify plaque of your shared favourite song" : undefined,
+      trendingIdea: undefined,
       diyOption: "Create a hand-lettered quote from their favourite book or song, framed simply",
       customization: "Include a small card explaining why you chose this specific item",
       links: [
