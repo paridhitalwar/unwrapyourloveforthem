@@ -99,6 +99,7 @@ IMPORTANT: Include India-specific shopping options where possible (Ugaoo, Jaypor
 - Occasion: ${occasion}  
 - Budget: ₹${budget}
 - Age group: ${age || "25 to 35"}
+- Pronouns: ${pronoun === "he" ? "He/Him" : pronoun === "she" ? "She/Her" : pronoun === "they" ? "They/Them" : "Not specified"}
 - Mode: ${isDeep ? "Deep dive (15 questions)" : "Quick (6 questions)"}
 
 Here are ${questions.length} questions I answered about ${name}:
