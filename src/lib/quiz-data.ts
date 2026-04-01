@@ -47,6 +47,16 @@ export const quizQuestions: QuizQuestion[] = [
     ],
   },
   {
+    id: 16,
+    question: (name) => `How would you describe where things stand between you and ${name} right now?`,
+    options: [
+      { label: "We're in a really close chapter, talk often, know each other deeply", value: "close" },
+      { label: "We're warm but a bit distant lately, life got busy", value: "distant" },
+      { label: "This relationship is still growing, we're getting to know each other", value: "growing" },
+      { label: "It's a specific context: work, family, or a defined role", value: "contextual" },
+    ],
+  },
+  {
     id: 2,
     question: (name) => `How does ${name} usually feel about receiving gifts?`,
     options: [
