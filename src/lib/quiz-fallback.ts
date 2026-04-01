@@ -25,7 +25,7 @@ export function generateFallback(
         "A subscription to something they'd love but never buy themselves",
         ...(isDeep ? ["A terrarium kit they can build and nurture"] : []),
       ],
-      trendingIdea: isDeep ? "Trending right now: Custom star map print of a date meaningful to them" : undefined,
+      trendingIdea: undefined,
       diyOption: "Propagate a cutting from a plant you own, pot it in something handmade, attach a note about what it means",
       customization: "Add a hand-painted clay tag with their name",
       links: [
