@@ -90,8 +90,8 @@ Based on ALL answers provided, generate a JSON object with this exact structure:
     {
       "emoji": "relevant emoji",
       "name": "Territory name (creative, evocative)",
-      "description": "One line about why this direction fits ${name}",
-      "giftIdeas": ["${giftIdeaCount} specific gift concepts (not product links) tailored to their personality, age group ${age || "25 to 35"}, and ₹${budget} budget"],${trendingField}
+      "description": "One line about why this direction fits ${name} — MUST reference the ${relationship} relationship and the ${occasion} occasion context. Explain the reasoning behind this direction in terms of both personality AND relationship dynamics.",
+      "giftIdeas": ["${giftIdeaCount} specific gift concepts (not product links) tailored to their personality, age group ${age || "25 to 35"}, and ₹${budget} budget"],
       "diyOption": "A make-it-yourself alternative",
       "customization": "How to personalise the gift",
       "links": [{"label": "Store name", "url": "real URL to a relevant store with a relevant search query"}]
