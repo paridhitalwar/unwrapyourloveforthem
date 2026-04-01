@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ChevronDown, Scissors, Sparkles, ExternalLink, Lightbulb, Mail } from "lucide-react";
+import { ChevronDown, Scissors, Sparkles, Lightbulb, Mail, Share2, Copy, Check } from "lucide-react";
+import { toast } from "sonner";
 import Navigation from "@/components/Navigation";
 import Confetti from "@/components/Confetti";
 import type { GiftResult, QuizMode } from "@/lib/quiz-data";
@@ -215,13 +216,33 @@ const Results = () => {
           </div>
         </motion.section>
 
-        {/* CTA */}
+        {/* Share & CTA */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
-          className="text-center"
+          className="flex flex-col items-center gap-3"
         >
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={async () => {
+              const shareText = `I just used Unwrap to find the perfect gift direction for ${name}! 🎁`;
+              const shareUrl = window.location.origin;
+              if (navigator.share) {
+                try {
+                  await navigator.share({ title: "Unwrap", text: shareText, url: shareUrl });
+                } catch {}
+              } else {
+                await navigator.clipboard.writeText(`${shareText}\n${shareUrl}`);
+                toast.success("Copied to clipboard!");
+              }
+            }}
+            className="w-full max-w-xs px-8 py-3 rounded-full gradient-purple text-white font-semibold flex items-center justify-center gap-2 shadow-md"
+          >
+            <Share2 className="w-4 h-4" /> Share with a friend
+          </motion.button>
+
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
