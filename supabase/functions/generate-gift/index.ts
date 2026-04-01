@@ -22,6 +22,7 @@ CRITICAL RULES:
 2. All suggestions must be AGE-APPROPRIATE for someone aged ${age || "25 to 35"}. A teenager gets very different gifts than a retiree.
 3. Base every suggestion on the specific personality signals from the answers, not generic gift lists.
 4. Never suggest the same type of item twice (e.g., if one territory has a journal, no other territory should have any kind of journal or notebook).
+5. Every territory description MUST weave in the relationship type (${relationship}), the occasion (${occasion}), and the relationship dynamic from the answers. The reasoning should feel like advice from someone who understands BOTH the person AND the gifter's relationship with them. Example: "For a close friend navigating a big life change like moving cities, something that grounds her new daily routine feels more meaningful than something celebratory."
 You must respond with valid JSON only. No markdown, no code blocks, just JSON.`;
 
     const trendGuidance = isDeep ? `
@@ -46,9 +47,7 @@ IMPORTANT: Include India-specific shopping options where possible (Ugaoo, Jaypor
     const giftIdeaCount = isDeep ? 4 : 3;
     const linkCount = isDeep ? 4 : 3;
 
-    const trendingField = isDeep
-      ? `\n      "trendingIdea": "One trending gift idea explicitly labeled as 'Trending right now: [item]' with reason why it fits ${name}",`
-      : "";
+    const trendingField = "";
 
     const cardNotesStructure = isDeep
       ? `"cardNotes": {
@@ -63,12 +62,7 @@ IMPORTANT: Include India-specific shopping options where possible (Ugaoo, Jaypor
     "simple": "1 sentence, sincere and direct"
   }`;
 
-    const trendingPicksField = `,
-  "trendingPicks": [
-    {"item": "Trend-matched item 1", "reason": "because [reason from their answers]"},
-    {"item": "Trend-matched item 2", "reason": "because [reason from their answers]"},
-    {"item": "Trend-matched item 3", "reason": "because [reason from their answers]"}
-  ]`;
+    const trendingPicksField = "";
 
     const surpriseField = isDeep
       ? `,
@@ -96,8 +90,8 @@ Based on ALL answers provided, generate a JSON object with this exact structure:
     {
       "emoji": "relevant emoji",
       "name": "Territory name (creative, evocative)",
-      "description": "One line about why this direction fits ${name}",
-      "giftIdeas": ["${giftIdeaCount} specific gift concepts (not product links) tailored to their personality, age group ${age || "25 to 35"}, and ₹${budget} budget"],${trendingField}
+      "description": "One line about why this direction fits ${name} — MUST reference the ${relationship} relationship and the ${occasion} occasion context. Explain the reasoning behind this direction in terms of both personality AND relationship dynamics.",
+      "giftIdeas": ["${giftIdeaCount} specific gift concepts (not product links) tailored to their personality, age group ${age || "25 to 35"}, and ₹${budget} budget"],
       "diyOption": "A make-it-yourself alternative",
       "customization": "How to personalise the gift",
       "links": [{"label": "Store name", "url": "real URL to a relevant store with a relevant search query"}]

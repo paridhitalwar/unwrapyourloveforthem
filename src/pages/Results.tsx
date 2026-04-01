@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ChevronDown, TrendingUp, Scissors, Sparkles, ExternalLink, Lightbulb, Mail } from "lucide-react";
+import { ChevronDown, Scissors, Sparkles, ExternalLink, Lightbulb, Mail } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Confetti from "@/components/Confetti";
 import type { GiftResult, QuizMode } from "@/lib/quiz-data";
@@ -129,13 +129,6 @@ const Results = () => {
                             </ul>
                           </div>
 
-                          {/* Trending idea */}
-                          {territory.trendingIdea && (
-                            <div className="flex items-start gap-2 p-3 rounded-xl bg-amber-50 border border-amber-100">
-                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[11px] font-semibold whitespace-nowrap"><TrendingUp className="w-3 h-3" /> Trending</span>
-                              <p className="text-sm font-medium text-foreground">{territory.trendingIdea}</p>
-                            </div>
-                          )}
 
                           {/* DIY */}
                           <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-100">
@@ -179,30 +172,6 @@ const Results = () => {
             })}
           </div>
         </motion.section>
-
-        {/* Trending Picks */}
-        {result.trendingPicks && result.trendingPicks.length > 0 && (
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="mb-10"
-          >
-            <div className="rounded-[20px] bg-amber-50 border border-amber-100 p-6 sm:p-7">
-              <h2 className="font-bold text-lg text-amber-800 mb-4 flex items-center gap-2">
-                <TrendingUp className="w-5 h-5" /> Trending for someone like {name}
-              </h2>
-              <div className="space-y-3">
-                {result.trendingPicks.map((pick, idx) => (
-                  <div key={idx} className="bg-card rounded-xl p-4 shadow-sm">
-                    <p className="text-sm font-medium text-foreground">{pick.item}</p>
-                    <p className="text-xs text-muted-foreground mt-1">Because {pick.reason}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.section>
-        )}
 
         {/* Surprise Note */}
         {result.surpriseNote && (

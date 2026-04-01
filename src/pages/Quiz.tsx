@@ -9,6 +9,7 @@ import { generateFallback } from "@/lib/quiz-fallback";
 
 const optionEmojis: Record<number, string[]> = {
   1: ["☕", "💬", "🎨", "✅"],
+  16: ["❤️", "🌤️", "🌱", "🏷️"],
   2: ["🤩", "💭", "🔧", "😊"],
   3: ["✨", "🏡", "🧘", "🎭"],
   4: ["🌱", "⚡", "🏖️", "🔄"],

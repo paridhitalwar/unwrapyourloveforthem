@@ -25,7 +25,7 @@ export function generateFallback(
         "A subscription to something they'd love but never buy themselves",
         ...(isDeep ? ["A terrarium kit they can build and nurture"] : []),
       ],
-      trendingIdea: isDeep ? "Trending right now: Custom star map print of a date meaningful to them" : undefined,
+      trendingIdea: undefined,
       diyOption: "Propagate a cutting from a plant you own, pot it in something handmade, attach a note about what it means",
       customization: "Add a hand-painted clay tag with their name",
       links: [
@@ -45,7 +45,7 @@ export function generateFallback(
         "A curated playlist turned into a custom vinyl or cassette",
         ...(isDeep ? ["A wellness hamper with aromatherapy and journaling supplies"] : []),
       ],
-      trendingIdea: isDeep ? "Trending right now: Personalised Spotify plaque of your shared favourite song" : undefined,
+      trendingIdea: undefined,
       diyOption: "Create a hand-lettered quote from their favourite book or song, framed simply",
       customization: "Include a small card explaining why you chose this specific item",
       links: [
@@ -65,7 +65,7 @@ export function generateFallback(
         "A curated experience box tailored to their interests",
         ...(isDeep ? ["A Masterclass subscription in a topic they're curious about"] : []),
       ],
-      trendingIdea: isDeep ? "Trending right now: Custom digital portrait in a style they love" : undefined,
+      trendingIdea: undefined,
       diyOption: "Plan a surprise day built around 3-4 of their favourite small pleasures",
       customization: "Add a personal itinerary card for the experience with inside jokes",
       links: [
@@ -88,7 +88,7 @@ export function generateFallback(
         "An artisan tea or coffee collection with a handwritten tasting guide",
         "A guided journal designed for self-reflection",
       ],
-      trendingIdea: "Trending right now: Luxury aromatherapy diffuser with curated essential oil blends",
+      trendingIdea: undefined,
       diyOption: "Create a 'permission to rest' voucher book with specific relaxation activities you'll facilitate",
       customization: "Pair it with a handwritten note about why they deserve to slow down",
       links: [
@@ -117,12 +117,6 @@ export function generateFallback(
     territories: baseTerritories,
     cardNotes,
   };
-
-  result.trendingPicks = [
-    { item: "Custom star map or coordinates print", reason: "they value meaning in objects" },
-    { item: "Masterclass or Skillshare subscription", reason: "they love diving deep into new interests" },
-    { item: "Artisan candle or fragrance set", reason: "they appreciate the finer details" },
-  ];
 
   return result;
 }
