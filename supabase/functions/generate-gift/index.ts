@@ -62,12 +62,7 @@ IMPORTANT: Include India-specific shopping options where possible (Ugaoo, Jaypor
     "simple": "1 sentence, sincere and direct"
   }`;
 
-    const trendingPicksField = `,
-  "trendingPicks": [
-    {"item": "Trend-matched item 1", "reason": "because [reason from their answers]"},
-    {"item": "Trend-matched item 2", "reason": "because [reason from their answers]"},
-    {"item": "Trend-matched item 3", "reason": "because [reason from their answers]"}
-  ]`;
+    const trendingPicksField = "";
 
     const surpriseField = isDeep
       ? `,
