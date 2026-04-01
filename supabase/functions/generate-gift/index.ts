@@ -9,20 +9,45 @@ serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
-    const { name, relationship, occasion, budget, age, mode, questions, answerLabels } = await req.json();
+    const { name, relationship, occasion, budget, age, pronoun, mode, questions, answerLabels } = await req.json();
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
 
     const isDeep = mode === "deep";
 
+    const genderGuidance = pronoun === "he"
+      ? `GENDER CONTEXT: The recipient uses He/Him pronouns.
+- DEPRIORITISE: scented candles, floral arrangements, skincare/self-care kits, bath products, and home décor UNLESS Q3 answer is "curated and intentional" (which signals he cares about his environment).
+- PRIORITISE: experiences, gear/tools for interests, food/drink, books, tech accessories, workspace items, outdoor gear, hobby equipment, learning subscriptions.
+- Gift idea examples within each direction MUST reflect masculine-coded or gender-neutral items. No pastel, floral, or skincare defaults.`
+      : pronoun === "she"
+      ? `GENDER CONTEXT: The recipient uses She/Her pronouns.
+- Keep the full range of gift directions but FILTER through lifestyle context from Q3 (living space) and Q4 (life season).
+- A woman who travels constantly or is in a busy/transitional phase should NOT get home/plant/candle directions.
+- Match directions to her actual lifestyle signals, not feminine stereotypes.`
+      : pronoun === "they"
+      ? `GENDER CONTEXT: The recipient uses They/Them pronouns.
+- Ignore ALL gender assumptions entirely. Rely PURELY on Q1-Q6 answer signals.
+- Use the most lifestyle-driven filtering. No gendered defaults whatsoever.`
+      : `GENDER CONTEXT: No pronoun specified. Use lifestyle-driven filtering from Q1-Q6 answers. Avoid gendered defaults.`;
+
+    const homeFilterRule = `HOME/LIFESTYLE DIRECTION FILTER (MANDATORY):
+Before suggesting ANY direction related to home décor, plants, candles, terrariums, or living space items:
+- CHECK Q3 (living space): Only surface if answer is "curated and intentional" OR "warm and cozy". If answer is "minimal" or "creative chaos", skip home-settling directions.
+- CHECK Q4 (life season): If answer is "busy and full" or "in between/transitional", DEPRIORITISE home-settling directions entirely.
+- A busy 26-year-old in a shared flat should NEVER get "here's a plant for your space" as a direction.`;
+
     const systemPrompt = `You are a warm, insightful gift advisor. You write like a thoughtful friend, never like a chatbot or algorithm. 
 Never use the words "algorithm", "AI", or "data". Never say "buy this". Use phrases like "consider this" or "explore this".
+${genderGuidance}
+${homeFilterRule}
 CRITICAL RULES:
 1. Every single gift idea must be UNIQUE. Never repeat the same gift concept, item, or category across territories.
 2. All suggestions must be AGE-APPROPRIATE for someone aged ${age || "25 to 35"}. A teenager gets very different gifts than a retiree.
 3. Base every suggestion on the specific personality signals from the answers, not generic gift lists.
 4. Never suggest the same type of item twice (e.g., if one territory has a journal, no other territory should have any kind of journal or notebook).
 5. Every territory description MUST weave in the relationship type (${relationship}), the occasion (${occasion}), and the relationship dynamic from the answers. The reasoning should feel like advice from someone who understands BOTH the person AND the gifter's relationship with them. Example: "For a close friend navigating a big life change like moving cities, something that grounds her new daily routine feels more meaningful than something celebratory."
+6. Gift idea EXAMPLES within each direction must match the recipient's gender context and lifestyle. Do not default to feminine-coded items (floral, pastel, skincare) for He/Him recipients, or masculine-coded items for She/Her recipients, unless the answers specifically indicate those interests.
 You must respond with valid JSON only. No markdown, no code blocks, just JSON.`;
 
     const trendGuidance = isDeep ? `

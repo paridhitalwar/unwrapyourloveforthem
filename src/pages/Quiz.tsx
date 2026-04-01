@@ -189,7 +189,7 @@ const Quiz = () => {
         navigate("/results");
       }
     }
-  }, [currentQ, answers, name, relationship, occasion, budget, age, mode, navigate, activeQuestions, totalQuestions]);
+  }, [currentQ, answers, name, relationship, occasion, budget, age, pronoun, mode, navigate, activeQuestions, totalQuestions]);
 
   if (isLoading) {
     return <LoadingScreen mode={mode} loadingText={loadingText} />;
