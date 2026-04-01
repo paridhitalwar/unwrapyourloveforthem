@@ -88,7 +88,7 @@ export function generateFallback(
         "An artisan tea or coffee collection with a handwritten tasting guide",
         "A guided journal designed for self-reflection",
       ],
-      trendingIdea: "Trending right now: Luxury aromatherapy diffuser with curated essential oil blends",
+      trendingIdea: undefined,
       diyOption: "Create a 'permission to rest' voucher book with specific relaxation activities you'll facilitate",
       customization: "Pair it with a handwritten note about why they deserve to slow down",
       links: [
