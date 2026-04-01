@@ -241,6 +241,6 @@ export interface GiftResult {
     simple: string;
     playful?: string;
   };
-  trendingPicks?: { item: string; reason: string }[];
+  
   surpriseNote?: string;
 }

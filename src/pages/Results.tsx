@@ -180,30 +180,6 @@ const Results = () => {
           </div>
         </motion.section>
 
-        {/* Trending Picks */}
-        {result.trendingPicks && result.trendingPicks.length > 0 && (
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="mb-10"
-          >
-            <div className="rounded-[20px] bg-amber-50 border border-amber-100 p-6 sm:p-7">
-              <h2 className="font-bold text-lg text-amber-800 mb-4 flex items-center gap-2">
-                <TrendingUp className="w-5 h-5" /> Trending for someone like {name}
-              </h2>
-              <div className="space-y-3">
-                {result.trendingPicks.map((pick, idx) => (
-                  <div key={idx} className="bg-card rounded-xl p-4 shadow-sm">
-                    <p className="text-sm font-medium text-foreground">{pick.item}</p>
-                    <p className="text-xs text-muted-foreground mt-1">Because {pick.reason}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.section>
-        )}
-
         {/* Surprise Note */}
         {result.surpriseNote && (
           <motion.section
