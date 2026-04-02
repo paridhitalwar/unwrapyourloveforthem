@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ChevronDown, Scissors, Sparkles, Lightbulb, Mail, Share2, Copy, Check } from "lucide-react";
+import { ChevronDown, Scissors, Sparkles, Lightbulb, Mail, Share2, Check } from "lucide-react";
 import { toast } from "sonner";
 import Navigation from "@/components/Navigation";
 import Confetti from "@/components/Confetti";
