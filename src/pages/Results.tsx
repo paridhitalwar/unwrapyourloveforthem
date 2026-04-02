@@ -277,20 +277,14 @@ const Results = () => {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={async () => {
-              const directionNames = result.territories.map(t => t.name);
-              const shareText = `I used Unwrap to figure out what to gift ${name} 🎁\n\nHere's what it suggested:\n${directionNames.map(d => `→ ${d}`).join("\n")}\n\nFind your gift direction: ${window.location.origin}`;
-              if (navigator.share) {
-                try {
-                  await navigator.share({ title: "Unwrap", text: shareText });
-                } catch {}
-              } else {
-                await navigator.clipboard.writeText(shareText);
-                toast.success("Copied to clipboard!", { duration: 2000 });
-              }
+              const shareText = `I used Unwrap to figure out what to gift ${name} 🎁\n\n${result.territories.map((t, i) => `Direction ${i + 1}: ${t.name}\n${t.giftIdeas.map(idea => `  • ${idea}`).join("\n")}`).join("\n\n")}\n\nFind your gift direction: https://unwrapyourloveforthem.lovable.app`;
+              await navigator.clipboard.writeText(shareText);
+              setCopied(true);
+              setTimeout(() => setCopied(false), 2000);
             }}
             className="w-full max-w-xs px-8 py-3 rounded-full gradient-purple text-white font-semibold flex items-center justify-center gap-2 shadow-md"
           >
-            <Share2 className="w-4 h-4" /> Share with a friend
+            {copied ? <><Check className="w-4 h-4" /> Copied to clipboard!</> : <><Share2 className="w-4 h-4" /> Share with a friend</>}
           </motion.button>
 
           <motion.button
