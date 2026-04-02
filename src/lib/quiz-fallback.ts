@@ -29,10 +29,10 @@ export function generateFallback(
       diyOption: "Propagate a cutting from a plant you own, pot it in something handmade, attach a note about what it means",
       customization: "Add a hand-painted clay tag with their name",
       links: [
-        { label: "Ugaoo", url: "https://www.ugaoo.com" },
-        { label: "Etsy - Handmade", url: "https://www.etsy.com/search?q=handmade+planter" },
-        { label: "Uncommon Goods", url: "https://www.uncommongoods.com" },
-        ...(isDeep ? [{ label: "Chumbak", url: "https://www.chumbak.com" }] : []),
+        { label: "Ugaoo", url: "https://www.google.com/search?q=Ugaoo+plants" },
+        { label: "Etsy Handmade", url: "https://www.google.com/search?q=Etsy+handmade+planter" },
+        { label: "Uncommon Goods", url: "https://www.google.com/search?q=Uncommon+Goods+gifts" },
+        ...(isDeep ? [{ label: "Chumbak", url: "https://www.google.com/search?q=Chumbak+gifts" }] : []),
       ],
     },
     {
@@ -49,10 +49,10 @@ export function generateFallback(
       diyOption: "Create a hand-lettered quote from their favourite book or song, framed simply",
       customization: "Include a small card explaining why you chose this specific item",
       links: [
-        { label: "Jaypore", url: "https://www.jaypore.com" },
-        { label: "Kama Ayurveda", url: "https://www.kamaayurveda.com" },
-        { label: "Etsy - Personalised", url: "https://www.etsy.com/search?q=personalised+gift" },
-        ...(isDeep ? [{ label: "Nykaa", url: "https://www.nykaa.com" }] : []),
+        { label: "Jaypore", url: "https://www.google.com/search?q=Jaypore+gifts" },
+        { label: "Kama Ayurveda", url: "https://www.google.com/search?q=Kama+Ayurveda" },
+        { label: "Etsy Personalised", url: "https://www.google.com/search?q=Etsy+personalised+gift" },
+        ...(isDeep ? [{ label: "Nykaa", url: "https://www.google.com/search?q=Nykaa+gifts" }] : []),
       ],
     },
     {
@@ -69,10 +69,10 @@ export function generateFallback(
       diyOption: "Plan a surprise day built around 3-4 of their favourite small pleasures",
       customization: "Add a personal itinerary card for the experience with inside jokes",
       links: [
-        { label: "Uncommon Goods", url: "https://www.uncommongoods.com" },
-        { label: "Etsy - Custom Art", url: "https://www.etsy.com/search?q=custom+portrait" },
-        { label: "Jaypore", url: "https://www.jaypore.com" },
-        ...(isDeep ? [{ label: "The Label Life", url: "https://www.thelabellife.com" }] : []),
+        { label: "Uncommon Goods", url: "https://www.google.com/search?q=Uncommon+Goods+unique+gifts" },
+        { label: "Etsy Custom Art", url: "https://www.google.com/search?q=Etsy+custom+portrait+art" },
+        { label: "Jaypore", url: "https://www.google.com/search?q=Jaypore+artisan+gifts" },
+        ...(isDeep ? [{ label: "The Label Life", url: "https://www.google.com/search?q=The+Label+Life" }] : []),
       ],
     },
   ];
@@ -92,10 +92,10 @@ export function generateFallback(
       diyOption: "Create a 'permission to rest' voucher book with specific relaxation activities you'll facilitate",
       customization: "Pair it with a handwritten note about why they deserve to slow down",
       links: [
-        { label: "Kama Ayurveda", url: "https://www.kamaayurveda.com" },
-        { label: "Nykaa Luxe", url: "https://www.nykaa.com/luxe" },
-        { label: "The Label Life", url: "https://www.thelabellife.com" },
-        { label: "Etsy - Wellness", url: "https://www.etsy.com/search?q=wellness+gift+set" },
+        { label: "Kama Ayurveda", url: "https://www.google.com/search?q=Kama+Ayurveda+wellness" },
+        { label: "Nykaa Luxe", url: "https://www.google.com/search?q=Nykaa+Luxe+skincare" },
+        { label: "The Label Life", url: "https://www.google.com/search?q=The+Label+Life+loungewear" },
+        { label: "Etsy Wellness", url: "https://www.google.com/search?q=Etsy+wellness+gift+set" },
       ],
     });
   }

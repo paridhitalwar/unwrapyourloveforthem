@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ChevronDown, Scissors, Sparkles, Lightbulb, Mail, Share2, Copy, Check } from "lucide-react";
+import { ChevronDown, Scissors, Sparkles, Lightbulb, Mail, Share2, Check } from "lucide-react";
 import { toast } from "sonner";
 import Navigation from "@/components/Navigation";
 import Confetti from "@/components/Confetti";
@@ -17,6 +17,7 @@ const Results = () => {
   const [mode, setMode] = useState<QuizMode>("quick");
   const [openTerritory, setOpenTerritory] = useState<number>(0);
   const [feedbackScore, setFeedbackScore] = useState<number | null>(null);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -58,9 +59,6 @@ const Results = () => {
           className="mb-10"
         >
           <div className="gradient-purple rounded-3xl p-8 sm:p-10 relative overflow-hidden">
-            <div className="absolute top-4 right-4 w-16 h-16 border border-white/10 rounded-lg rotate-12" />
-            <div className="absolute bottom-4 left-4 w-12 h-12 border border-white/10 rounded-lg -rotate-6" />
-            <div className="absolute top-1/2 right-1/4 w-8 h-8 bg-white/5 rounded-full" />
 
             <p className="font-display italic text-white/60 text-sm uppercase tracking-[0.1em] mb-4">
               Here's what I see in {name}
@@ -279,20 +277,14 @@ const Results = () => {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={async () => {
-              const directionNames = result.territories.map(t => t.name);
-              const shareText = `I used Unwrap to figure out what to gift ${name} 🎁\n\nHere's what it suggested:\n${directionNames.map(d => `→ ${d}`).join("\n")}\n\nFind your gift direction: ${window.location.origin}`;
-              if (navigator.share) {
-                try {
-                  await navigator.share({ title: "Unwrap", text: shareText });
-                } catch {}
-              } else {
-                await navigator.clipboard.writeText(shareText);
-                toast.success("Copied to clipboard!", { duration: 2000 });
-              }
+              const shareText = `I used Unwrap to figure out what to gift ${name} 🎁\n\n${result.territories.map((t, i) => `Direction ${i + 1}: ${t.name}\n${t.giftIdeas.map(idea => `  • ${idea}`).join("\n")}`).join("\n\n")}\n\nFind your gift direction: https://unwrapyourloveforthem.lovable.app`;
+              await navigator.clipboard.writeText(shareText);
+              setCopied(true);
+              setTimeout(() => setCopied(false), 2000);
             }}
             className="w-full max-w-xs px-8 py-3 rounded-full gradient-purple text-white font-semibold flex items-center justify-center gap-2 shadow-md"
           >
-            <Share2 className="w-4 h-4" /> Share with a friend
+            {copied ? <><Check className="w-4 h-4" /> Copied to clipboard!</> : <><Share2 className="w-4 h-4" /> Share with a friend</>}
           </motion.button>
 
           <motion.button
