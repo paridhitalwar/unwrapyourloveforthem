@@ -126,7 +126,7 @@ Based on ALL answers provided, generate a JSON object with this exact structure:
   ${cardNotesStructure}${trendingPicksField}${surpriseField}
 }
 
-Generate exactly ${territoryCount} territories. Each territory must have exactly ${giftIdeaCount} gift ideas and ${linkCount} links. Make all shopping links real working URLs with relevant search queries.`;
+Generate exactly ${territoryCount} territories. Each territory must have exactly ${giftIdeaCount} gift ideas and ${linkCount} links. CRITICAL: All shopping links MUST be Google search URLs in the format https://www.google.com/search?q=Brand+Name+relevant+terms. Do NOT use direct store URLs as they may be broken. Example: {"label": "Blue Tokai Coffee", "url": "https://www.google.com/search?q=Blue+Tokai+Coffee"}`;
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
