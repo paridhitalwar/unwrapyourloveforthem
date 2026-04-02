@@ -69,10 +69,10 @@ export function generateFallback(
       diyOption: "Plan a surprise day built around 3-4 of their favourite small pleasures",
       customization: "Add a personal itinerary card for the experience with inside jokes",
       links: [
-        { label: "Uncommon Goods", url: "https://www.uncommongoods.com" },
-        { label: "Etsy - Custom Art", url: "https://www.etsy.com/search?q=custom+portrait" },
-        { label: "Jaypore", url: "https://www.jaypore.com" },
-        ...(isDeep ? [{ label: "The Label Life", url: "https://www.thelabellife.com" }] : []),
+        { label: "Uncommon Goods", url: "https://www.google.com/search?q=Uncommon+Goods+unique+gifts" },
+        { label: "Etsy Custom Art", url: "https://www.google.com/search?q=Etsy+custom+portrait+art" },
+        { label: "Jaypore", url: "https://www.google.com/search?q=Jaypore+artisan+gifts" },
+        ...(isDeep ? [{ label: "The Label Life", url: "https://www.google.com/search?q=The+Label+Life" }] : []),
       ],
     },
   ];
