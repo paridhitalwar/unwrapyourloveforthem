@@ -58,9 +58,6 @@ const Results = () => {
           className="mb-10"
         >
           <div className="gradient-purple rounded-3xl p-8 sm:p-10 relative overflow-hidden">
-            <div className="absolute top-4 right-4 w-16 h-16 border border-white/10 rounded-lg rotate-12" />
-            <div className="absolute bottom-4 left-4 w-12 h-12 border border-white/10 rounded-lg -rotate-6" />
-            <div className="absolute top-1/2 right-1/4 w-8 h-8 bg-white/5 rounded-full" />
 
             <p className="font-display italic text-white/60 text-sm uppercase tracking-[0.1em] mb-4">
               Here's what I see in {name}
