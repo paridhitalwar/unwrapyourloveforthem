@@ -16,6 +16,7 @@ const Results = () => {
   const [name, setName] = useState("");
   const [mode, setMode] = useState<QuizMode>("quick");
   const [openTerritory, setOpenTerritory] = useState<number>(0);
+  const [feedbackScore, setFeedbackScore] = useState<number | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -216,6 +217,57 @@ const Results = () => {
           </div>
         </motion.section>
 
+        {/* Feedback Row */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.7 }}
+          className="mb-10"
+        >
+          <div className="rounded-[20px] bg-card p-6 shadow-card text-center">
+            <p className="font-display font-semibold text-foreground text-base mb-4">
+              Was this specific to {name}?
+            </p>
+            <div className="flex justify-center gap-3 sm:gap-4 mb-2">
+              {[
+                { emoji: "😐", score: 1 },
+                { emoji: "😑", score: 2 },
+                { emoji: "🤔", score: 3 },
+                { emoji: "😊", score: 4 },
+                { emoji: "🎯", score: 5 },
+              ].map(({ emoji, score }) => (
+                <button
+                  key={score}
+                  onClick={() => {
+                    setFeedbackScore(score);
+                    console.log(`[Unwrap Feedback] Session score: ${score}`);
+                  }}
+                  className={`text-2xl p-2 rounded-xl transition-all duration-200 ${
+                    feedbackScore === score
+                      ? "scale-125 border-2 border-primary bg-unwrap-purple-soft"
+                      : "hover:scale-110 border-2 border-transparent"
+                  }`}
+                >
+                  {emoji}
+                </button>
+              ))}
+            </div>
+            <div className="flex justify-between px-2 mb-3">
+              <span className="text-[11px] text-muted-foreground">Too generic</span>
+              <span className="text-[11px] text-muted-foreground">Perfectly specific</span>
+            </div>
+            {feedbackScore !== null && (
+              <motion.p
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-sm text-muted-foreground italic"
+              >
+                Thanks — this helps Unwrap get better
+              </motion.p>
+            )}
+          </div>
+        </motion.section>
+
         {/* Share & CTA */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -227,15 +279,15 @@ const Results = () => {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={async () => {
-              const shareText = `I just used Unwrap to find the perfect gift direction for ${name}! 🎁`;
-              const shareUrl = window.location.origin;
+              const directionNames = result.territories.map(t => t.name);
+              const shareText = `I used Unwrap to figure out what to gift ${name} 🎁\n\nHere's what it suggested:\n${directionNames.map(d => `→ ${d}`).join("\n")}\n\nFind your gift direction: ${window.location.origin}`;
               if (navigator.share) {
                 try {
-                  await navigator.share({ title: "Unwrap", text: shareText, url: shareUrl });
+                  await navigator.share({ title: "Unwrap", text: shareText });
                 } catch {}
               } else {
-                await navigator.clipboard.writeText(`${shareText}\n${shareUrl}`);
-                toast.success("Copied to clipboard!");
+                await navigator.clipboard.writeText(shareText);
+                toast.success("Copied to clipboard!", { duration: 2000 });
               }
             }}
             className="w-full max-w-xs px-8 py-3 rounded-full gradient-purple text-white font-semibold flex items-center justify-center gap-2 shadow-md"
