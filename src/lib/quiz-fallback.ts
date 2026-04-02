@@ -92,10 +92,10 @@ export function generateFallback(
       diyOption: "Create a 'permission to rest' voucher book with specific relaxation activities you'll facilitate",
       customization: "Pair it with a handwritten note about why they deserve to slow down",
       links: [
-        { label: "Kama Ayurveda", url: "https://www.kamaayurveda.com" },
-        { label: "Nykaa Luxe", url: "https://www.nykaa.com/luxe" },
-        { label: "The Label Life", url: "https://www.thelabellife.com" },
-        { label: "Etsy - Wellness", url: "https://www.etsy.com/search?q=wellness+gift+set" },
+        { label: "Kama Ayurveda", url: "https://www.google.com/search?q=Kama+Ayurveda+wellness" },
+        { label: "Nykaa Luxe", url: "https://www.google.com/search?q=Nykaa+Luxe+skincare" },
+        { label: "The Label Life", url: "https://www.google.com/search?q=The+Label+Life+loungewear" },
+        { label: "Etsy Wellness", url: "https://www.google.com/search?q=Etsy+wellness+gift+set" },
       ],
     });
   }
