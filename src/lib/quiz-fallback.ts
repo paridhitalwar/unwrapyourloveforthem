@@ -49,10 +49,10 @@ export function generateFallback(
       diyOption: "Create a hand-lettered quote from their favourite book or song, framed simply",
       customization: "Include a small card explaining why you chose this specific item",
       links: [
-        { label: "Jaypore", url: "https://www.jaypore.com" },
-        { label: "Kama Ayurveda", url: "https://www.kamaayurveda.com" },
-        { label: "Etsy - Personalised", url: "https://www.etsy.com/search?q=personalised+gift" },
-        ...(isDeep ? [{ label: "Nykaa", url: "https://www.nykaa.com" }] : []),
+        { label: "Jaypore", url: "https://www.google.com/search?q=Jaypore+gifts" },
+        { label: "Kama Ayurveda", url: "https://www.google.com/search?q=Kama+Ayurveda" },
+        { label: "Etsy Personalised", url: "https://www.google.com/search?q=Etsy+personalised+gift" },
+        ...(isDeep ? [{ label: "Nykaa", url: "https://www.google.com/search?q=Nykaa+gifts" }] : []),
       ],
     },
     {
