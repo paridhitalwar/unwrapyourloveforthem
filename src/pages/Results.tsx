@@ -17,6 +17,7 @@ const Results = () => {
   const [mode, setMode] = useState<QuizMode>("quick");
   const [openTerritory, setOpenTerritory] = useState<number>(0);
   const [feedbackScore, setFeedbackScore] = useState<number | null>(null);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
