@@ -29,10 +29,10 @@ export function generateFallback(
       diyOption: "Propagate a cutting from a plant you own, pot it in something handmade, attach a note about what it means",
       customization: "Add a hand-painted clay tag with their name",
       links: [
-        { label: "Ugaoo", url: "https://www.ugaoo.com" },
-        { label: "Etsy - Handmade", url: "https://www.etsy.com/search?q=handmade+planter" },
-        { label: "Uncommon Goods", url: "https://www.uncommongoods.com" },
-        ...(isDeep ? [{ label: "Chumbak", url: "https://www.chumbak.com" }] : []),
+        { label: "Ugaoo", url: "https://www.google.com/search?q=Ugaoo+plants" },
+        { label: "Etsy Handmade", url: "https://www.google.com/search?q=Etsy+handmade+planter" },
+        { label: "Uncommon Goods", url: "https://www.google.com/search?q=Uncommon+Goods+gifts" },
+        ...(isDeep ? [{ label: "Chumbak", url: "https://www.google.com/search?q=Chumbak+gifts" }] : []),
       ],
     },
     {
