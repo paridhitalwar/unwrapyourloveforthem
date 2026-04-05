@@ -23,7 +23,7 @@ const optionEmojis: Record<number, string[]> = {
   12: ["🎊", "🗣️", "🚪", "👀"],
   13: ["❤️", "😄", "😜", "🤗"],
   14: ["📿", "🌅", "👥", "🎒"],
-  15: ["🎉", "🤔", "😰", "🤷"],
+  
 };
 
 const GiftBoxAnimation = () => (
