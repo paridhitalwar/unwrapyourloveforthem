@@ -252,7 +252,7 @@ const Results = () => {
             </div>
             <div className="flex justify-between px-2 mb-3">
               <span className="text-[11px] text-muted-foreground">Too generic</span>
-              <span className="text-[11px] text-muted-foreground">Perfectly specific</span>
+              <span className="text-[11px] text-muted-foreground">Spot On</span>
             </div>
             {feedbackScore !== null && (
               <motion.p
