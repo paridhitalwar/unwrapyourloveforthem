@@ -99,6 +99,7 @@ export const quizQuestions: QuizQuestion[] = [
   },
   {
     id: 6,
+    deepOnly: true,
     question: (name) => `Which of these sounds most like ${name}?`,
     options: [
       { label: "The friend who remembers everyone's birthdays and small details", value: "attentive" },
